@@ -3,403 +3,2039 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NihonGo VIP — Belajar Bahasa Jepang</title>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Crimson+Pro:ital,wght@0,300;1,300&display=swap" rel="stylesheet">
+<title>HayyanDesu — NihonGo VIP</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;700&family=Noto+Sans+JP:wght@300;400;500&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Crimson+Pro:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
 <style>
+
 :root {
   --red: #c0392b;
-  --red-l: #e74c3c;
-  --gold: #d4a017;
-  --gold-l: #f0c040;
-  --gold-dim: rgba(212,160,23,0.15);
+  --red-dark: #922b21;
+  --red-light: #e74c3c;
   --black: #0d0d0d;
-  --ink: #1c1c1c;
-  --white: #fafaf9;
-  --cream: #f4f0eb;
+  --ink: #1a1a1a;
+  --white: #faf8f5;
+  --cream: #f0ece4;
   --gray: #6b6b6b;
-  --border: #e5e0d8;
+  --gold: #c9a84c;
+  --border: rgba(192,57,43,0.2);
 }
-*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
-html{scroll-behavior:smooth;}
-body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--black);color:var(--white);overflow-x:hidden;}
-::-webkit-scrollbar{width:4px;}
-::-webkit-scrollbar-thumb{background:var(--red);border-radius:2px;}
 
-/* ===== SCREEN SYSTEM ===== */
-.screen{display:none;min-height:100vh;}
-.screen.active{display:block;}
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
 
-/* ===== LOADER ===== */
-#s-loader{
-  display:flex;flex-direction:column;align-items:center;justify-content:center;
-  background:var(--black);gap:16px;
-}
-.ld-k{font-family:'Noto Serif JP',serif;font-size:80px;color:var(--red);opacity:0;animation:fadeIn .7s ease .3s forwards;text-shadow:0 0 40px rgba(192,57,43,.5);}
-.ld-t{font-size:12px;letter-spacing:6px;color:rgba(255,255,255,.3);text-transform:uppercase;opacity:0;animation:fadeIn .5s ease .9s forwards;}
-.ld-bw{width:180px;height:1px;background:rgba(255,255,255,.08);overflow:hidden;position:relative;}
-.ld-b{position:absolute;left:0;top:0;height:100%;width:0;background:var(--red);animation:ldBar 1.8s ease .5s forwards;}
-@keyframes fadeIn{to{opacity:1;}}
-@keyframes ldBar{to{width:100%;}}
+html { scroll-behavior: smooth; }
 
-/* ===== LANDING PAGE ===== */
-#s-landing{background:var(--black);}
+body {
+  background: var(--white);
+  color: var(--ink);
+  font-family: 'Noto Sans JP', sans-serif;
+  font-weight: 300;
+  overflow-x: hidden;
+}
 
-/* Hero */
-.hero{
-  min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;
-  text-align:center;padding:80px 24px;position:relative;overflow:hidden;
-}
-.hero-sun{
-  position:absolute;width:600px;height:600px;border-radius:50%;
-  background:radial-gradient(circle,rgba(192,57,43,.1) 0%,transparent 70%);
-  border:1px solid rgba(192,57,43,.08);top:50%;left:50%;
-  transform:translate(-50%,-50%);animation:sunP 6s ease-in-out infinite;
-}
-.hero-sun::before{content:'';position:absolute;inset:50px;border-radius:50%;border:1px solid rgba(212,160,23,.05);}
-@keyframes sunP{0%,100%{transform:translate(-50%,-50%) scale(1);}50%{transform:translate(-50%,-50%) scale(1.03);}}
-.hero-bg-k{
-  position:absolute;font-family:'Noto Serif JP',serif;font-size:300px;font-weight:300;
-  color:rgba(192,57,43,.04);top:50%;left:50%;transform:translate(-50%,-50%);
-  pointer-events:none;user-select:none;line-height:1;
-}
-.hero-badge{
-  display:inline-flex;align-items:center;gap:8px;
-  padding:6px 18px;border:1px solid rgba(212,160,23,.35);
-  font-size:10px;letter-spacing:4px;text-transform:uppercase;color:var(--gold);
-  margin-bottom:24px;position:relative;
-  animation:fadeIn .8s ease 2.8s both;
-}
-.hero-badge::before{content:'★';font-size:10px;}
-.hero-title{
-  font-family:'Noto Serif JP',serif;font-size:clamp(40px,8vw,90px);
-  font-weight:300;line-height:1.1;margin-bottom:16px;
-  opacity:0;animation:slideUp 1s ease 3s forwards;
-}
-.hero-title em{color:var(--red);font-style:normal;}
-.hero-sub{
-  font-size:14px;color:rgba(255,255,255,.35);line-height:1.9;
-  max-width:440px;margin:0 auto 40px;
-  opacity:0;animation:slideUp 1s ease 3.2s forwards;
-}
-@keyframes slideUp{from{opacity:0;transform:translateY(24px);}to{opacity:1;transform:translateY(0);}}
+/* ===== SCROLLBAR ===== */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--cream); }
+::-webkit-scrollbar-thumb { background: var(--red); border-radius: 2px; }
 
-.hero-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;opacity:0;animation:slideUp 1s ease 3.4s forwards;}
+/* ===== LOADING SCREEN ===== */
+#loader {
+  position: fixed; inset: 0;
+  background: var(--black);
+  z-index: 9999;
+  display: flex; align-items: center; justify-content: center;
+  flex-direction: column;
+  gap: 20px;
+  animation: loaderOut 0.6s ease 2.4s forwards;
+}
+@keyframes loaderOut {
+  to { opacity:0; pointer-events:none; }
+}
+.loader-kanji {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 80px;
+  color: var(--red);
+  opacity: 0;
+  animation: kanjiIn 0.8s ease 0.3s forwards, kanjiPulse 1s ease 1.1s forwards;
+  text-shadow: 0 0 40px rgba(192,57,43,0.6);
+}
+@keyframes kanjiIn { to { opacity:1; } }
+@keyframes kanjiPulse { to { transform: scale(1.15); opacity: 0; } }
+.loader-text {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 13px;
+  color: rgba(255,255,255,0.4);
+  letter-spacing: 6px;
+  opacity: 0;
+  animation: kanjiIn 0.6s ease 0.9s forwards;
+}
+.loader-bar {
+  width: 200px; height: 1px;
+  background: rgba(255,255,255,0.1);
+  position: relative;
+  overflow: hidden;
+}
+.loader-bar::after {
+  content: '';
+  position: absolute; left: 0; top: 0;
+  width: 0; height: 100%;
+  background: var(--red);
+  animation: barFill 1.8s ease 0.6s forwards;
+}
+@keyframes barFill { to { width: 100%; } }
 
-/* VIP Card */
-.vip-card{
-  margin:0 auto;max-width:420px;
-  background:linear-gradient(135deg,#1a1200 0%,#0d0d00 40%,#1a0a00 100%);
-  border:1px solid rgba(212,160,23,.35);padding:32px;
-  position:relative;overflow:hidden;text-align:center;
-  opacity:0;animation:slideUp 1s ease 3.6s forwards;
+/* ===== HERO ===== */
+#hero {
+  min-height: 100vh;
+  background: var(--black);
+  position: relative;
+  display: flex; align-items: center; justify-content: center;
+  flex-direction: column;
+  overflow: hidden;
+  text-align: center;
 }
-.vip-card::before{
-  content:'';position:absolute;top:0;left:0;right:0;height:1px;
-  background:linear-gradient(to right,transparent,var(--gold),transparent);
-  animation:sweep 3s ease-in-out infinite;
+
+/* Washi paper texture */
+#hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image:
+    repeating-linear-gradient(0deg, transparent, transparent 40px, rgba(255,255,255,0.012) 40px, rgba(255,255,255,0.012) 41px),
+    repeating-linear-gradient(90deg, transparent, transparent 40px, rgba(255,255,255,0.012) 40px, rgba(255,255,255,0.012) 41px);
+  pointer-events: none;
 }
-@keyframes sweep{0%,100%{opacity:.4;}50%{opacity:1;}}
-.vip-crown{font-size:40px;margin-bottom:12px;display:block;filter:drop-shadow(0 0 12px rgba(212,160,23,.5));}
-.vip-title{font-family:'Noto Serif JP',serif;font-size:22px;color:var(--gold);margin-bottom:6px;}
-.vip-price{font-size:32px;font-weight:700;color:var(--white);margin:16px 0 4px;}
-.vip-price span{font-size:14px;font-weight:400;color:rgba(255,255,255,.4);}
-.vip-perks{text-align:left;margin:20px 0;display:flex;flex-direction:column;gap:10px;}
-.vip-perk{display:flex;align-items:center;gap:10px;font-size:13px;color:rgba(255,255,255,.65);}
-.vip-perk-dot{width:5px;height:5px;border-radius:50%;background:var(--gold);flex-shrink:0;}
+
+/* Red circle — rising sun */
+.sun {
+  position: absolute;
+  width: 500px; height: 500px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(192,57,43,0.18) 0%, transparent 70%);
+  border: 1px solid rgba(192,57,43,0.12);
+  top: 50%; left: 50%;
+  transform: translate(-50%,-50%);
+  animation: sunPulse 6s ease-in-out infinite;
+}
+.sun::before {
+  content: '';
+  position: absolute; inset: 30px;
+  border-radius: 50%;
+  border: 1px solid rgba(192,57,43,0.08);
+}
+@keyframes sunPulse {
+  0%,100% { transform: translate(-50%,-50%) scale(1); opacity:0.7; }
+  50%      { transform: translate(-50%,-50%) scale(1.04); opacity:1; }
+}
+
+/* Vertical red lines (torii motif) */
+.torii-line {
+  position: absolute;
+  width: 2px;
+  background: linear-gradient(to bottom, transparent, rgba(192,57,43,0.4), transparent);
+  pointer-events: none;
+}
+
+.hero-content {
+  position: relative; z-index: 2;
+  display: flex; flex-direction: column;
+  align-items: center; gap: 24px;
+}
+
+.hero-jp {
+  font-family: 'Noto Serif JP', serif;
+  font-size: clamp(60px, 10vw, 110px);
+  font-weight: 300;
+  color: var(--white);
+  line-height: 1;
+  opacity: 0;
+  transform: translateY(30px);
+  animation: heroIn 1.2s cubic-bezier(0.22,1,0.36,1) 2.8s forwards;
+  letter-spacing: 0.05em;
+}
+.hero-jp span { color: var(--red); }
+
+.hero-sub {
+  font-family: 'Crimson Pro', serif;
+  font-size: 16px;
+  font-style: italic;
+  color: rgba(255,255,255,0.4);
+  letter-spacing: 4px;
+  opacity: 0;
+  animation: heroIn 1s ease 3.2s forwards;
+}
+
+.hero-desc {
+  font-size: 13px;
+  color: rgba(255,255,255,0.3);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  opacity: 0;
+  animation: heroIn 1s ease 3.5s forwards;
+  max-width: 400px;
+  line-height: 1.8;
+}
+
+@keyframes heroIn {
+  to { opacity:1; transform: translateY(0); }
+}
+
+.hero-line {
+  width: 1px; height: 0;
+  background: var(--red);
+  animation: lineGrow 0.8s ease 3.8s forwards;
+  margin: 0 auto;
+}
+@keyframes lineGrow { to { height: 60px; } }
+
+.start-btn {
+  margin-top: 8px;
+  padding: 14px 44px;
+  background: transparent;
+  border: 1px solid var(--red);
+  color: var(--white);
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 12px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  opacity: 0;
+  animation: heroIn 0.8s ease 4.1s forwards;
+  transition: color 0.3s ease;
+}
+.start-btn::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: var(--red);
+  transform: translateX(-100%);
+  transition: transform 0.3s ease;
+}
+.start-btn:hover::before { transform: translateX(0); }
+.start-btn span { position: relative; z-index: 1; }
+.start-btn:hover { color: #fff; }
+
+/* Floating kanji bg */
+.bg-kanji {
+  position: absolute;
+  font-family: 'Noto Serif JP', serif;
+  font-size: 160px;
+  color: rgba(192,57,43,0.04);
+  pointer-events: none;
+  user-select: none;
+  animation: bgKanjiFloat ease-in-out infinite;
+}
+@keyframes bgKanjiFloat {
+  0%,100% { transform: translateY(0) rotate(var(--rot)); }
+  50%      { transform: translateY(-20px) rotate(var(--rot)); }
+}
+
+/* ===== NAV ===== */
+nav {
+  position: sticky; top: 0; z-index: 100;
+  background: var(--black);
+  border-bottom: 1px solid rgba(192,57,43,0.25);
+  padding: 0 40px;
+  display: flex; align-items: center;
+  height: 60px;
+  gap: 0;
+}
+.nav-logo {
+  font-family: 'Noto Serif JP', serif;
+  color: var(--white);
+  font-size: 18px;
+  margin-right: auto;
+}
+.nav-logo span { color: var(--red); }
+.nav-links { display: flex; gap: 0; }
+.nav-link {
+  padding: 0 20px;
+  height: 60px;
+  display: flex; align-items: center;
+  color: rgba(255,255,255,0.45);
+  font-size: 11px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  transition: color 0.2s, border-color 0.2s;
+  white-space: nowrap;
+}
+.nav-link:hover, .nav-link.active { color: var(--red); border-bottom-color: var(--red); }
+
+/* ===== SECTIONS ===== */
+.section {
+  padding: 80px 40px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.section-header {
+  display: flex; align-items: center; gap: 20px;
+  margin-bottom: 60px;
+}
+.section-num {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 60px;
+  color: var(--red);
+  opacity: 0.15;
+  line-height: 1;
+  font-weight: 300;
+}
+.section-title-wrap { display: flex; flex-direction: column; gap: 4px; }
+.section-jp {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 28px;
+  color: var(--ink);
+  font-weight: 400;
+}
+.section-id {
+  font-size: 11px;
+  letter-spacing: 4px;
+  color: var(--gray);
+  text-transform: uppercase;
+}
+.section-line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(to right, var(--border), transparent);
+}
+
+/* ===== CHAPTER CARDS (MATERI) ===== */
+.materi-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+}
+.materi-card {
+  background: var(--white);
+  padding: 36px 32px;
+  cursor: pointer;
+  transition: background 0.25s ease;
+  position: relative;
+  overflow: hidden;
+}
+.materi-card::before {
+  content: '';
+  position: absolute; left: 0; top: 0; bottom: 0;
+  width: 3px;
+  background: var(--red);
+  transform: scaleY(0);
+  transform-origin: bottom;
+  transition: transform 0.3s ease;
+}
+.materi-card:hover::before { transform: scaleY(1); }
+.materi-card:hover { background: #fdf5f4; }
+.materi-card:hover .card-kanji { color: var(--red); }
+
+.card-num {
+  font-size: 10px; letter-spacing: 4px;
+  color: var(--gray); text-transform: uppercase;
+  margin-bottom: 12px;
+}
+.card-kanji {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 42px; font-weight: 300;
+  color: rgba(0,0,0,0.12);
+  position: absolute; right: 24px; top: 24px;
+  line-height: 1;
+  transition: color 0.3s;
+  pointer-events: none;
+}
+.card-title {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 20px; font-weight: 400;
+  color: var(--ink); margin-bottom: 8px;
+}
+.card-desc {
+  font-size: 12px; line-height: 1.8;
+  color: var(--gray);
+}
+.card-badge {
+  display: inline-block;
+  margin-top: 16px;
+  padding: 4px 12px;
+  border: 1px solid var(--border);
+  font-size: 9px; letter-spacing: 3px;
+  text-transform: uppercase; color: var(--red);
+}
+
+/* ===== CONTENT PANEL (MATERI DETAIL) ===== */
+#content-panel {
+  display: none;
+  background: var(--white);
+  border-top: 1px solid var(--border);
+}
+#content-panel.active { display: block; }
+
+.panel-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 60px 40px;
+}
+.panel-header {
+  display: flex; justify-content: space-between; align-items: flex-start;
+  margin-bottom: 48px;
+  padding-bottom: 32px;
+  border-bottom: 1px solid var(--border);
+}
+.panel-title {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 32px; font-weight: 300;
+}
+.panel-title span { color: var(--red); }
+.panel-close {
+  width: 40px; height: 40px;
+  border: 1px solid var(--border);
+  background: none; cursor: pointer;
+  font-size: 18px; color: var(--gray);
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.2s;
+}
+.panel-close:hover { background: var(--red); border-color: var(--red); color: #fff; }
+
+/* Character grid */
+.char-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  gap: 2px;
+  margin-bottom: 48px;
+  background: var(--border);
+  border: 1px solid var(--border);
+}
+.char-cell {
+  background: var(--white);
+  padding: 20px 8px;
+  text-align: center;
+  cursor: pointer;
+  transition: background 0.2s;
+  position: relative;
+}
+.char-cell:hover { background: var(--red); }
+.char-cell:hover .char-jp, .char-cell:hover .char-ro { color: #fff !important; }
+.char-jp {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 32px; font-weight: 400;
+  color: var(--ink); display: block; line-height: 1.2;
+}
+.char-ro {
+  font-size: 11px; letter-spacing: 2px;
+  color: var(--gray); display: block;
+  margin-top: 4px; text-transform: lowercase;
+}
+
+/* Vocab / Grammar tables */
+.vocab-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 48px;
+}
+.vocab-table th {
+  background: var(--black);
+  color: var(--white);
+  font-size: 10px; letter-spacing: 3px;
+  text-transform: uppercase;
+  padding: 14px 20px;
+  text-align: left;
+  font-weight: 400;
+}
+.vocab-table td {
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border);
+  font-size: 14px;
+}
+.vocab-table tr:hover td { background: #fdf5f4; }
+.vocab-table .jp { font-family: 'Noto Serif JP', serif; font-size: 18px; color: var(--ink); }
+.vocab-table .ro { color: var(--red); font-size: 12px; }
+.vocab-table .id { color: var(--gray); }
+.vocab-table .ex { font-size: 12px; font-style: italic; color: #888; }
+
+/* Grammar pattern */
+.grammar-pattern {
+  background: var(--cream);
+  border-left: 3px solid var(--red);
+  padding: 24px 28px;
+  margin-bottom: 20px;
+  position: relative;
+}
+.grammar-pattern .pattern {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 20px; color: var(--ink);
+  margin-bottom: 8px;
+}
+.grammar-pattern .meaning {
+  font-size: 13px; color: var(--gray);
+}
+.grammar-pattern .example {
+  margin-top: 12px;
+  font-size: 14px;
+  border-top: 1px solid rgba(0,0,0,0.08);
+  padding-top: 12px;
+}
+
+/* ===== QUIZ ===== */
+.quiz-section {
+  margin-top: 60px;
+  padding-top: 48px;
+  border-top: 1px solid var(--border);
+}
+.quiz-header {
+  display: flex; align-items: center; gap: 16px;
+  margin-bottom: 36px;
+}
+.quiz-badge {
+  background: var(--red);
+  color: #fff; padding: 6px 16px;
+  font-size: 10px; letter-spacing: 3px;
+  text-transform: uppercase;
+}
+.quiz-title {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 22px; font-weight: 400;
+}
+.quiz-progress {
+  font-size: 11px; color: var(--gray);
+  margin-left: auto; letter-spacing: 2px;
+}
+
+.quiz-card {
+  background: var(--cream);
+  border: 1px solid var(--border);
+  padding: 40px;
+  margin-bottom: 16px;
+}
+.quiz-q {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 36px; text-align: center;
+  color: var(--ink); margin-bottom: 36px;
+  display: block;
+}
+.quiz-q-text {
+  font-size: 15px; text-align: center;
+  color: var(--gray); margin-bottom: 32px;
+  display: block; line-height: 1.8;
+}
+.quiz-options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+.quiz-opt {
+  padding: 16px 20px;
+  background: var(--white);
+  border: 1px solid var(--border);
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 14px;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.2s;
+  position: relative;
+  overflow: hidden;
+}
+.quiz-opt:hover { border-color: var(--red); background: #fdf5f4; }
+.quiz-opt.correct { background: #e8f8f0; border-color: #27ae60; color: #1e8449; }
+.quiz-opt.wrong { background: #fdecea; border-color: var(--red); color: var(--red-dark); }
+.quiz-opt:disabled { cursor: default; }
+
+.quiz-feedback {
+  margin-top: 20px;
+  padding: 16px 20px;
+  display: none;
+  font-size: 13px; line-height: 1.7;
+}
+.quiz-feedback.correct { background: #e8f8f0; border-left: 3px solid #27ae60; color: #1e8449; display: block; }
+.quiz-feedback.wrong { background: #fdecea; border-left: 3px solid var(--red); color: var(--red-dark); display: block; }
+
+.quiz-nav {
+  display: flex; gap: 12px; margin-top: 24px; justify-content: flex-end;
+}
+.btn-next {
+  padding: 12px 32px;
+  background: var(--black);
+  color: var(--white);
+  border: none; cursor: pointer;
+  font-size: 11px; letter-spacing: 3px;
+  text-transform: uppercase;
+  transition: background 0.2s;
+}
+.btn-next:hover { background: var(--red); }
+.btn-restart {
+  padding: 12px 32px;
+  background: transparent;
+  color: var(--ink);
+  border: 1px solid var(--border);
+  cursor: pointer;
+  font-size: 11px; letter-spacing: 3px;
+  text-transform: uppercase;
+  transition: all 0.2s;
+}
+.btn-restart:hover { border-color: var(--red); color: var(--red); }
+
+.quiz-result {
+  text-align: center; padding: 60px 40px;
+  background: var(--cream); border: 1px solid var(--border);
+  display: none;
+}
+.result-score {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 72px; color: var(--red);
+  line-height: 1;
+}
+.result-label {
+  font-size: 12px; letter-spacing: 4px;
+  text-transform: uppercase; color: var(--gray);
+  margin: 12px 0 24px;
+}
+.result-msg {
+  font-family: 'Crimson Pro', serif;
+  font-style: italic; font-size: 18px;
+  color: var(--ink);
+}
+
+/* ===== METHOD SECTION ===== */
+#method { background: var(--black); padding: 80px 40px; }
+.method-inner { max-width: 1100px; margin: 0 auto; }
+.method-grid {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 1px;
+  background: rgba(192,57,43,0.2);
+  border: 1px solid rgba(192,57,43,0.2);
+  margin-top: 60px;
+}
+.method-card {
+  background: var(--black);
+  padding: 40px 32px;
+  position: relative;
+  overflow: hidden;
+}
+.method-card::after {
+  content: '';
+  position: absolute; bottom: 0; left: 0; right: 0;
+  height: 2px;
+  background: var(--red);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s ease;
+}
+.method-card:hover::after { transform: scaleX(1); }
+.method-num {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 48px; color: rgba(192,57,43,0.2);
+  line-height: 1; margin-bottom: 20px; font-weight: 300;
+}
+.method-title {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 18px; color: var(--white);
+  margin-bottom: 12px; font-weight: 400;
+}
+.method-desc { font-size: 13px; color: rgba(255,255,255,0.35); line-height: 1.9; }
+.method-icon {
+  font-size: 28px; margin-bottom: 16px; display: block;
+  color: var(--red);
+}
+
+/* White section headers on dark bg */
+#method .section-jp { color: var(--white); }
+#method .section-id { color: rgba(255,255,255,0.3); }
+
+/* ===== PROGRESS TRACKER ===== */
+#progress-section {
+  padding: 80px 40px;
+  background: var(--cream);
+}
+.progress-inner { max-width: 1100px; margin: 0 auto; }
+.progress-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px,1fr)); gap: 20px; margin-top: 60px; }
+.progress-item {
+  background: var(--white);
+  border: 1px solid var(--border);
+  padding: 28px 24px;
+}
+.prog-label { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--gray); margin-bottom: 12px; }
+.prog-bar-wrap { height: 3px; background: rgba(0,0,0,0.08); position: relative; overflow: hidden; }
+.prog-bar {
+  height: 100%; background: var(--red);
+  transform-origin: left;
+  transform: scaleX(0);
+  transition: transform 1.2s cubic-bezier(0.22,1,0.36,1);
+}
+.prog-bar.animate { transform: scaleX(var(--w)); }
+.prog-num { font-family: 'Noto Serif JP', serif; font-size: 32px; margin-top: 10px; color: var(--ink); }
+.prog-unit { font-size: 11px; color: var(--gray); }
+
+/* ===== FOOTER ===== */
+footer {
+  background: var(--black);
+  padding: 48px 40px;
+  border-top: 1px solid rgba(192,57,43,0.2);
+  text-align: center;
+}
+.footer-jp {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 24px; color: var(--red); margin-bottom: 8px;
+}
+.footer-sub { font-size: 11px; color: rgba(255,255,255,0.2); letter-spacing: 4px; }
+
+/* ===== ANIMATIONS ===== */
+.fade-up {
+  opacity: 0; transform: translateY(30px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.fade-up.visible { opacity: 1; transform: translateY(0); }
+
+/* Stagger children */
+.stagger > * { transition-delay: calc(var(--i) * 0.08s); }
+
+/* ===== TABS ===== */
+.tabs { display: flex; gap: 0; margin-bottom: 36px; border-bottom: 1px solid var(--border); }
+.tab {
+  padding: 12px 24px;
+  font-size: 11px; letter-spacing: 3px;
+  text-transform: uppercase; cursor: pointer;
+  color: var(--gray);
+  border-bottom: 2px solid transparent;
+  transition: all 0.2s;
+  margin-bottom: -1px;
+}
+.tab.active { color: var(--red); border-bottom-color: var(--red); }
+.tab-content { display: none; }
+.tab-content.active { display: block; }
+
+/* responsive */
+@media(max-width:768px){
+  nav { padding: 0 16px; }
+  .nav-link { padding: 0 10px; font-size: 9px; }
+  .section { padding: 60px 20px; }
+  .quiz-options { grid-template-columns: 1fr; }
+  .method-grid { grid-template-columns: 1fr; }
+  .hero-jp { font-size: 52px; }
+  #method { padding: 60px 20px; }
+  #progress-section { padding: 60px 20px; }
+}
+
+
+/* ============================================================
+   VIP SYSTEM STYLES
+============================================================ */
+.screen { display:none; min-height:100vh; }
+.screen.active { display:block; }
+
+/* Loader VIP */
+#s-loader { display:flex; flex-direction:column; align-items:center; justify-content:center; background:var(--black); gap:16px; }
+.ld-k { font-family:'Noto Serif JP',serif; font-size:80px; color:var(--red); opacity:0; animation:fadeInV .7s ease .3s forwards; text-shadow:0 0 40px rgba(192,57,43,.5); }
+.ld-t { font-size:11px; letter-spacing:6px; color:rgba(255,255,255,.3); text-transform:uppercase; opacity:0; animation:fadeInV .5s ease .9s forwards; }
+.ld-bw { width:180px; height:1px; background:rgba(255,255,255,.08); overflow:hidden; position:relative; margin-top:4px; }
+.ld-b { position:absolute; left:0; top:0; height:100%; width:0; background:var(--red); animation:ldBarV 1.8s ease .5s forwards; }
+@keyframes fadeInV { to { opacity:1; } }
+@keyframes ldBarV  { to { width:100%; } }
+
+/* Marquee */
+.marquee-wrap { width:100%; overflow:hidden; background:rgba(192,57,43,0.1); border-top:1px solid rgba(192,57,43,0.2); border-bottom:1px solid rgba(192,57,43,0.2); padding:11px 0; position:relative; }
+.marquee-wrap::before,.marquee-wrap::after { content:''; position:absolute; top:0; bottom:0; width:80px; z-index:2; pointer-events:none; }
+.marquee-wrap::before { left:0; background:linear-gradient(to right,var(--black),transparent); }
+.marquee-wrap::after  { right:0; background:linear-gradient(to left,var(--black),transparent); }
+.marquee-track { display:flex; animation:marqueeV 34s linear infinite; width:max-content; }
+.marquee-track:hover { animation-play-state:paused; }
+.marquee-item { display:flex; align-items:center; gap:18px; padding:0 28px; white-space:nowrap; font-size:10px; letter-spacing:4px; text-transform:uppercase; color:rgba(255,255,255,0.28); }
+.m-dot { width:4px; height:4px; border-radius:50%; background:var(--red); flex-shrink:0; }
+.m-jp  { font-family:'Noto Serif JP',serif; font-size:14px; color:var(--red); letter-spacing:2px; }
+@keyframes marqueeV { 0% { transform:translateX(0); } 100% { transform:translateX(-50%); } }
+
+/* Landing hero */
+.vip-hero { min-height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:80px 24px; position:relative; overflow:hidden; background:var(--black); }
+.vip-hero-sun { position:absolute; width:600px; height:600px; border-radius:50%; background:radial-gradient(circle,rgba(192,57,43,.1) 0%,transparent 70%); border:1px solid rgba(192,57,43,.07); top:50%; left:50%; transform:translate(-50%,-50%); animation:vhSun 6s ease-in-out infinite; }
+.vip-hero-sun::before { content:''; position:absolute; inset:50px; border-radius:50%; border:1px solid rgba(201,168,76,.04); }
+@keyframes vhSun { 0%,100% { transform:translate(-50%,-50%) scale(1); } 50% { transform:translate(-50%,-50%) scale(1.03); } }
+.vip-hero-bgk { position:absolute; font-family:'Noto Serif JP',serif; font-size:300px; font-weight:300; color:rgba(192,57,43,.04); top:50%; left:50%; transform:translate(-50%,-50%); pointer-events:none; user-select:none; line-height:1; }
+.vip-badge { display:inline-flex; align-items:center; gap:8px; padding:6px 18px; border:1px solid rgba(201,168,76,.3); font-size:10px; letter-spacing:4px; text-transform:uppercase; color:var(--gold); margin-bottom:24px; animation:slideUpV 1s ease 2.8s both; }
+.vip-badge::before { content:'★'; }
+.vip-hero-title { font-family:'Noto Serif JP',serif; font-size:clamp(38px,8vw,86px); font-weight:300; line-height:1.1; margin-bottom:14px; color:#fff; opacity:0; animation:slideUpV 1s ease 3s forwards; }
+.vip-hero-title em { color:var(--red); font-style:normal; }
+.vip-hero-sub { font-size:13px; color:rgba(255,255,255,.32); line-height:1.9; max-width:420px; margin:0 auto 36px; opacity:0; animation:slideUpV 1s ease 3.2s forwards; }
+.vip-hero-btns { display:flex; gap:12px; justify-content:center; flex-wrap:wrap; opacity:0; animation:slideUpV 1s ease 3.4s forwards; }
+@keyframes slideUpV { from { opacity:0; transform:translateY(22px); } to { opacity:1; transform:translateY(0); } }
+
+/* VIP card */
+.vip-card-wrap { padding:0 24px 80px; background:var(--black); display:flex; justify-content:center; }
+.vip-card { width:100%; max-width:420px; background:linear-gradient(135deg,#1a1200,#0d0d00 40%,#1a0a00); border:1px solid rgba(201,168,76,.32); padding:32px; position:relative; overflow:hidden; text-align:center; }
+.vip-card::before { content:''; position:absolute; top:0; left:0; right:0; height:1px; background:linear-gradient(to right,transparent,var(--gold),transparent); animation:vipSweep 3.5s ease-in-out infinite; }
+@keyframes vipSweep { 0%,100% { opacity:.3; } 50% { opacity:1; } }
+.vip-crown { font-size:38px; margin-bottom:10px; display:block; filter:drop-shadow(0 0 12px rgba(201,168,76,.4)); }
+.vip-card-title { font-family:'Noto Serif JP',serif; font-size:20px; color:var(--gold); margin-bottom:6px; }
+.vip-price { font-size:30px; font-weight:700; color:#fff; margin:14px 0 4px; }
+.vip-price span { font-size:13px; font-weight:400; color:rgba(255,255,255,.35); }
+.vip-perks { text-align:left; margin:18px 0; display:flex; flex-direction:column; gap:9px; }
+.vip-perk { display:flex; align-items:center; gap:10px; font-size:13px; color:rgba(255,255,255,.6); }
+.vip-perk-dot { width:5px; height:5px; border-radius:50%; background:var(--gold); flex-shrink:0; }
+
+/* Steps */
+.steps-section { background:rgba(255,255,255,.02); padding:72px 24px; border-top:1px solid rgba(201,168,76,.1); }
+.steps-inner { max-width:860px; margin:0 auto; }
+.sec-ey { font-size:10px; letter-spacing:5px; text-transform:uppercase; color:rgba(255,255,255,.2); margin-bottom:10px; text-align:center; }
+.sec-tt { font-family:'Noto Serif JP',serif; font-size:26px; text-align:center; margin-bottom:48px; font-weight:300; color:#fff; }
+.sec-tt span { color:var(--gold); }
+.steps-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:2px; background:rgba(201,168,76,.1); border:1px solid rgba(201,168,76,.1); }
+.step-card { background:var(--black); padding:28px 20px; position:relative; overflow:hidden; }
+.step-card::after { content:''; position:absolute; bottom:0; left:0; right:0; height:2px; background:var(--gold); transform:scaleX(0); transform-origin:left; transition:transform .4s; }
+.step-card:hover::after { transform:scaleX(1); }
+.step-num  { font-family:'Noto Serif JP',serif; font-size:44px; color:rgba(201,168,76,.15); font-weight:300; line-height:1; margin-bottom:14px; }
+.step-icon { font-size:22px; margin-bottom:10px; display:block; }
+.step-title { font-size:14px; font-weight:600; margin-bottom:6px; color:#fff; }
+.step-desc  { font-size:12px; color:rgba(255,255,255,.3); line-height:1.8; }
 
 /* Buttons */
-.btn-gold{
-  padding:14px 36px;background:var(--gold);border:none;
-  color:var(--black);font-family:'Plus Jakarta Sans',sans-serif;
-  font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;
-  cursor:pointer;transition:all .2s;
+.btn-gold  { padding:13px 34px; background:var(--gold); border:none; color:var(--black); font-family:'Plus Jakarta Sans',sans-serif; font-size:12px; font-weight:700; letter-spacing:2px; text-transform:uppercase; cursor:pointer; transition:all .2s; }
+.btn-gold:hover  { filter:brightness(1.1); transform:translateY(-1px); }
+.btn-vghost { padding:12px 34px; background:transparent; border:1px solid rgba(255,255,255,.12); color:rgba(255,255,255,.38); font-family:'Plus Jakarta Sans',sans-serif; font-size:12px; letter-spacing:2px; text-transform:uppercase; cursor:pointer; transition:all .2s; }
+.btn-vghost:hover { border-color:var(--gold); color:var(--gold); }
+.btn-vred  { padding:13px 34px; background:var(--red); border:none; color:#fff; font-family:'Plus Jakarta Sans',sans-serif; font-size:12px; font-weight:600; letter-spacing:2px; text-transform:uppercase; cursor:pointer; transition:background .2s; }
+.btn-vred:hover { background:var(--red-light); }
+.btn-full  { width:100%; }
+
+/* Overlay / Modal */
+.overlay { position:fixed; inset:0; background:rgba(0,0,0,.88); z-index:200; display:none; align-items:center; justify-content:center; padding:20px; }
+.overlay.active { display:flex; }
+.vip-modal { background:#111; border:1px solid rgba(201,168,76,.22); width:100%; max-width:460px; max-height:90vh; overflow-y:auto; animation:modalInV .4s cubic-bezier(.22,1,.36,1); }
+@keyframes modalInV { from { opacity:0; transform:translateY(28px); } to { opacity:1; transform:translateY(0); } }
+.modal-head { padding:22px 26px; border-bottom:1px solid rgba(255,255,255,.06); display:flex; align-items:center; justify-content:space-between; }
+.modal-title { font-size:15px; font-weight:600; color:#fff; }
+.modal-title span { color:var(--gold); }
+.modal-close { background:none; border:none; color:rgba(255,255,255,.25); font-size:20px; cursor:pointer; transition:color .2s; }
+.modal-close:hover { color:#fff; }
+.modal-body { padding:26px; }
+.pay-steps  { display:flex; flex-direction:column; gap:18px; margin-bottom:24px; }
+.pay-step   { display:flex; gap:14px; align-items:flex-start; }
+.pay-step-n { width:26px; height:26px; border-radius:50%; background:var(--gold); color:var(--black); font-size:11px; font-weight:700; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+.pay-step-t { font-size:13px; color:rgba(255,255,255,.55); line-height:1.7; }
+.pay-step-t strong { color:#fff; }
+.dana-box   { background:rgba(0,120,255,.07); border:1px solid rgba(0,120,255,.18); padding:18px; margin:18px 0; text-align:center; }
+.dana-num   { font-size:22px; font-weight:700; letter-spacing:3px; color:#5b9ef4; margin-bottom:4px; }
+.dana-name  { font-size:11px; color:rgba(255,255,255,.35); }
+.copy-btn   { background:none; border:1px solid rgba(0,120,255,.25); color:#5b9ef4; font-size:10px; letter-spacing:2px; padding:5px 14px; cursor:pointer; transition:all .2s; margin-top:7px; }
+.copy-btn:hover { background:rgba(0,120,255,.1); }
+.amount-box { background:rgba(201,168,76,.07); border:1px solid rgba(201,168,76,.18); padding:14px; text-align:center; margin-bottom:18px; }
+.amount-num { font-size:34px; font-weight:700; color:var(--gold); }
+.amount-lbl { font-size:10px; color:rgba(255,255,255,.25); letter-spacing:2px; text-transform:uppercase; }
+.confirm-note { font-size:11px; color:rgba(255,255,255,.25); line-height:1.8; border-top:1px solid rgba(255,255,255,.06); padding-top:14px; margin-top:18px; }
+
+/* Login screen */
+#s-login { background:var(--black); display:flex; align-items:center; justify-content:center; }
+.login-wrap { width:100%; max-width:420px; padding:24px; animation:slideUpV .8s ease forwards; }
+.login-brand { text-align:center; margin-bottom:36px; }
+.login-brand-name { font-family:'Noto Serif JP',serif; font-size:32px; font-weight:300; color:#fff; }
+.login-brand-name em { color:var(--red); font-style:normal; }
+.login-brand-sub { font-size:10px; letter-spacing:3px; color:rgba(255,255,255,.18); text-transform:uppercase; margin-top:5px; }
+.login-tabs { display:flex; border-bottom:1px solid rgba(255,255,255,.07); margin-bottom:26px; }
+.ltab { flex:1; padding:11px; text-align:center; font-size:10px; letter-spacing:2px; text-transform:uppercase; color:rgba(255,255,255,.22); cursor:pointer; border-bottom:2px solid transparent; margin-bottom:-1px; transition:all .2s; }
+.ltab.active { color:var(--gold); border-bottom-color:var(--gold); }
+.lform { display:flex; flex-direction:column; gap:14px; }
+.lform.hidden { display:none; }
+.fl   { display:block; font-size:9px; letter-spacing:3px; text-transform:uppercase; color:rgba(255,255,255,.25); margin-bottom:7px; }
+.fi   { width:100%; padding:12px 15px; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.1); color:#fff; font-family:'Plus Jakarta Sans',sans-serif; font-size:14px; outline:none; transition:border-color .2s; }
+.fi:focus { border-color:var(--gold); }
+.fi::placeholder { color:rgba(255,255,255,.12); }
+.fhint { font-size:11px; color:rgba(255,255,255,.2); margin-top:5px; line-height:1.6; }
+.ferr  { font-size:12px; color:var(--red-light); padding:9px 13px; background:rgba(192,57,43,.1); border-left:2px solid var(--red); display:none; }
+.login-footer { margin-top:18px; text-align:center; font-size:12px; color:rgba(255,255,255,.18); }
+.login-footer a { color:var(--gold); cursor:pointer; }
+
+/* Admin screen */
+#s-admin { background:var(--black); padding:40px 24px; min-height:100vh; }
+.admin-wrap { max-width:900px; margin:0 auto; }
+.admin-hdr  { display:flex; align-items:center; justify-content:space-between; margin-bottom:28px; }
+.admin-ttl  { font-family:'Noto Serif JP',serif; font-size:26px; font-weight:300; color:#fff; }
+.admin-ttl span { color:var(--gold); }
+.admin-grid { display:grid; grid-template-columns:1fr 1fr; gap:18px; margin-bottom:22px; }
+.adm-card   { background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.07); padding:22px; }
+.adm-card-t { font-size:10px; letter-spacing:3px; text-transform:uppercase; color:rgba(255,255,255,.25); margin-bottom:14px; }
+.next-tok   { font-family:'Noto Serif JP',serif; font-size:60px; color:var(--gold); letter-spacing:12px; text-align:center; line-height:1; }
+.next-tok-l { font-size:9px; letter-spacing:3px; color:rgba(255,255,255,.18); text-align:center; margin-top:6px; }
+.tok-list   { display:flex; flex-direction:column; gap:7px; max-height:200px; overflow-y:auto; }
+.tok-item   { display:flex; align-items:center; justify-content:space-between; padding:9px 12px; background:rgba(201,168,76,.05); border:1px solid rgba(201,168,76,.12); }
+.ti-t { font-family:'Noto Serif JP',serif; font-size:18px; color:var(--gold); letter-spacing:4px; }
+.ti-u { font-size:11px; color:rgba(255,255,255,.35); }
+.ti-s { font-size:9px; letter-spacing:2px; }
+.ti-s.yes { color:#27ae60; } .ti-s.no { color:rgba(255,255,255,.2); }
+.mem-table  { width:100%; border-collapse:collapse; }
+.mem-table th { font-size:9px; letter-spacing:3px; text-transform:uppercase; color:rgba(255,255,255,.2); padding:9px 11px; text-align:left; border-bottom:1px solid rgba(255,255,255,.05); }
+.mem-table td { padding:10px 11px; font-size:12px; color:rgba(255,255,255,.55); border-bottom:1px solid rgba(255,255,255,.03); }
+.mem-table tr:hover td { background:rgba(255,255,255,.02); }
+.badge-vip { font-size:9px; padding:2px 7px; background:rgba(201,168,76,.12); color:var(--gold); }
+.adm-form  { display:flex; gap:9px; margin-bottom:13px; }
+.adm-inp   { flex:1; padding:9px 13px; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.09); color:#fff; font-family:'Plus Jakarta Sans',sans-serif; font-size:13px; outline:none; transition:border-color .2s; }
+.adm-inp:focus { border-color:var(--gold); }
+.btn-sm    { padding:9px 18px; background:var(--gold); border:none; color:var(--black); font-size:10px; letter-spacing:2px; text-transform:uppercase; cursor:pointer; font-weight:700; transition:all .2s; font-family:'Plus Jakarta Sans',sans-serif; }
+.btn-sm:hover { filter:brightness(1.1); }
+.btn-sm.red { background:var(--red); color:#fff; }
+.btn-sm.red:hover { background:var(--red-light); }
+.adm-note  { font-size:11px; color:rgba(255,255,255,.18); line-height:1.7; padding:12px; background:rgba(255,255,255,.02); border-left:2px solid rgba(201,168,76,.25); }
+
+/* Toast */
+.vtoast { position:fixed; bottom:22px; right:22px; z-index:9999; padding:13px 20px; background:#27ae60; color:#fff; font-size:13px; font-weight:600; letter-spacing:1px; opacity:0; transform:translateY(8px); transition:all .3s; pointer-events:none; }
+.vtoast.show { opacity:1; transform:translateY(0); }
+
+/* App Nav (VIP bar on top of old nav) */
+#vip-nav { height:54px; background:var(--black); border-bottom:1px solid rgba(192,57,43,.2); display:flex; align-items:center; padding:0 24px; gap:0; position:sticky; top:0; z-index:100; }
+.vip-nav-brand { font-family:'Noto Serif JP',serif; color:#fff; font-size:18px; margin-right:24px; font-weight:300; white-space:nowrap; }
+.vip-nav-brand em { color:var(--red); font-style:normal; }
+.vip-nav-brand small { font-size:11px; color:rgba(255,255,255,.2); margin-left:8px; letter-spacing:2px; }
+.vip-ani { height:54px; padding:0 16px; display:flex; align-items:center; font-size:11px; letter-spacing:1px; color:rgba(255,255,255,.35); cursor:pointer; border-bottom:2px solid transparent; transition:all .2s; white-space:nowrap; }
+.vip-ani:hover { color:rgba(255,255,255,.65); }
+.vip-ani.active { color:var(--red); border-bottom-color:var(--red); }
+.vip-nav-right { margin-left:auto; display:flex; align-items:center; gap:10px; }
+.vip-badge-nav { display:flex; align-items:center; gap:5px; padding:4px 10px; background:rgba(201,168,76,.08); border:1px solid rgba(201,168,76,.25); font-size:9px; letter-spacing:2px; color:var(--gold); text-transform:uppercase; }
+.vip-nav-av { width:30px; height:30px; border-radius:50%; background:var(--red); display:flex; align-items:center; justify-content:center; font-size:12px; color:#fff; font-weight:700; }
+.vip-nav-un { font-size:11px; color:rgba(255,255,255,.35); }
+.vip-nav-logout { font-size:10px; color:rgba(255,255,255,.18); cursor:pointer; padding:4px 9px; border:1px solid rgba(255,255,255,.07); transition:all .2s; }
+.vip-nav-logout:hover { color:var(--red); border-color:var(--red); }
+
+/* App pages */
+.vip-page { display:none; }
+.vip-page.active { display:block; }
+
+/* Fix old nav position when inside app */
+#s-app #main-nav { top:54px; }
+
+@media(max-width:768px){
+  .steps-grid,.admin-grid { grid-template-columns:1fr; }
+  #vip-nav { padding:0 12px; }
+  .vip-ani { padding:0 9px; font-size:10px; }
+  .vip-nav-un { display:none; }
+  .vip-nav-brand small { display:none; }
 }
-.btn-gold:hover{background:var(--gold-l);transform:translateY(-1px);}
-.btn-red{
-  padding:14px 36px;background:var(--red);border:none;
-  color:#fff;font-family:'Plus Jakarta Sans',sans-serif;
-  font-size:12px;font-weight:600;letter-spacing:2px;text-transform:uppercase;
-  cursor:pointer;transition:background .2s;
+</style>
+</head>
+<body>
+
+<div class="vtoast" id="vtoast"></div>
+
+<!-- ============================================================
+     LOADER
+============================================================ -->
+<div class="screen active" id="s-loader">
+  <div class="ld-k">日</div>
+  <div class="ld-t">NihonGo VIP · ハイヤン デス</div>
+  <div class="ld-bw"><div class="ld-b"></div></div>
+</div>
+
+<!-- ============================================================
+     LANDING PAGE
+============================================================ -->
+<div class="screen" id="s-landing" style="background:var(--black)">
+  <div class="vip-hero">
+    <div class="vip-hero-sun"></div>
+    <div class="vip-hero-bgk">日</div>
+    <div class="vip-badge">Akses VIP Eksklusif · ハイヤン デス</div>
+    <div class="vip-hero-title">Belajar Bahasa<br>Jepang <em>Serius</em></div>
+    <div class="vip-hero-sub">Platform belajar bahasa Jepang lengkap dari nol hingga mahir. Konten eksklusif hanya untuk member VIP.</div>
+    <div class="vip-hero-btns">
+      <button class="btn-gold" onclick="showModal('modal-vip')">Daftar VIP — Rp 2.000</button>
+      <button class="btn-vghost" onclick="showScreen('s-login')">Sudah punya akun? Masuk</button>
+    </div>
+  </div>
+
+  <!-- MARQUEE -->
+  <div class="marquee-wrap">
+    <div class="marquee-track">
+      <div class="marquee-item"><span class="m-jp">ハイヤン デス</span><span class="m-dot"></span><span>Hayyan Desu</span><span class="m-dot"></span><span>Belajar Bahasa Jepang</span><span class="m-dot"></span><span class="m-jp">日本語学習</span><span class="m-dot"></span><span>Member VIP Eksklusif</span><span class="m-dot"></span><span class="m-jp">ようこそ</span><span class="m-dot"></span><span>Selamat Datang</span><span class="m-dot"></span><span class="m-jp">頑張りましょう</span><span class="m-dot"></span><span>Ayo Semangat Belajar</span><span class="m-dot"></span></div>
+      <div class="marquee-item"><span class="m-jp">ハイヤン デス</span><span class="m-dot"></span><span>Hayyan Desu</span><span class="m-dot"></span><span>Belajar Bahasa Jepang</span><span class="m-dot"></span><span class="m-jp">日本語学習</span><span class="m-dot"></span><span>Member VIP Eksklusif</span><span class="m-dot"></span><span class="m-jp">ようこそ</span><span class="m-dot"></span><span>Selamat Datang</span><span class="m-dot"></span><span class="m-jp">頑張りましょう</span><span class="m-dot"></span><span>Ayo Semangat Belajar</span><span class="m-dot"></span></div>
+    </div>
+  </div>
+
+  <!-- VIP CARD -->
+  <div class="vip-card-wrap">
+    <div class="vip-card">
+      <span class="vip-crown">👑</span>
+      <div class="vip-card-title">Member VIP NihonGo</div>
+      <div class="vip-price">Rp 2.000 <span>/ selamanya</span></div>
+      <div class="vip-perks">
+        <div class="vip-perk"><div class="vip-perk-dot"></div>Token unik 3 digit (001–999)</div>
+        <div class="vip-perk"><div class="vip-perk-dot"></div>Akses semua materi lengkap</div>
+        <div class="vip-perk"><div class="vip-perk-dot"></div>Latihan soal interaktif per materi</div>
+        <div class="vip-perk"><div class="vip-perk-dot"></div>Pantau progres belajar</div>
+        <div class="vip-perk"><div class="vip-perk-dot"></div>Login kapan saja dengan username + token</div>
+      </div>
+      <button class="btn-gold btn-full" onclick="showModal('modal-vip')">Bergabung Sekarang</button>
+    </div>
+  </div>
+
+  <!-- STEPS -->
+  <div class="steps-section">
+    <div class="steps-inner">
+      <div class="sec-ey">Cara Bergabung</div>
+      <div class="sec-tt">4 Langkah <span>Mudah</span></div>
+      <div class="steps-grid">
+        <div class="step-card"><span class="step-icon">💳</span><div class="step-num">01</div><div class="step-title">Transfer Rp 2.000</div><div class="step-desc">Kirim ke nomor DANA yang tertera. Simpan bukti transfernya.</div></div>
+        <div class="step-card"><span class="step-icon">📸</span><div class="step-num">02</div><div class="step-title">Kirim Bukti Bayar</div><div class="step-desc">Hubungi admin via WA/DM dengan screenshot bukti transfer.</div></div>
+        <div class="step-card"><span class="step-icon">🎫</span><div class="step-num">03</div><div class="step-title">Terima Token VIP</div><div class="step-desc">Admin mengirimkan token unik 3 digit milikmu.</div></div>
+        <div class="step-card"><span class="step-icon">🚀</span><div class="step-num">04</div><div class="step-title">Daftar & Belajar</div><div class="step-desc">Buat username dengan tokenmu dan akses semua konten VIP!</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     MODAL PEMBAYARAN VIP
+============================================================ -->
+<div class="overlay" id="modal-vip">
+  <div class="vip-modal">
+    <div class="modal-head">
+      <div class="modal-title">Daftar <span>VIP Member</span></div>
+      <button class="modal-close" onclick="hideModal('modal-vip')">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="amount-box">
+        <div class="amount-num">Rp 2.000</div>
+        <div class="amount-lbl">Biaya pendaftaran VIP — sekali bayar</div>
+      </div>
+      <div class="pay-steps">
+        <div class="pay-step"><div class="pay-step-n">1</div><div class="pay-step-t">Transfer <strong>tepat Rp 2.000</strong> ke nomor DANA berikut:</div></div>
+      </div>
+      <div class="dana-box">
+        <div style="font-size:26px;margin-bottom:6px;">💙</div>
+        <div class="dana-num" id="dana-num-display">Belum diatur admin</div>
+        <div class="dana-name">a.n. Admin NihonGo VIP</div>
+        <button class="copy-btn" onclick="copyDana()">Salin Nomor</button>
+      </div>
+      <div class="pay-steps">
+        <div class="pay-step"><div class="pay-step-n">2</div><div class="pay-step-t">Screenshot bukti transfer, hubungi admin via WA/Instagram DM.</div></div>
+        <div class="pay-step"><div class="pay-step-n">3</div><div class="pay-step-t">Admin mengirimkan <strong>token VIP unik 3 digit</strong> milikmu.</div></div>
+        <div class="pay-step"><div class="pay-step-n">4</div><div class="pay-step-t">Gunakan token tersebut untuk <strong>daftar akun</strong> di halaman pendaftaran.</div></div>
+      </div>
+      <button class="btn-gold btn-full" onclick="hideModal('modal-vip');showScreen('s-login');switchLTab('daftar')">Saya Sudah Punya Token — Daftar Sekarang</button>
+      <div class="confirm-note">⚠️ Token hanya diberikan setelah pembayaran dikonfirmasi admin. Setiap token bersifat unik dan hanya bisa digunakan sekali.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     MODAL ADMIN LOGIN
+============================================================ -->
+<div class="overlay" id="modal-admin">
+  <div class="vip-modal" style="max-width:340px;">
+    <div class="modal-head">
+      <div class="modal-title">Login <span>Admin</span></div>
+      <button class="modal-close" onclick="hideModal('modal-admin')">✕</button>
+    </div>
+    <div class="modal-body">
+      <div style="margin-bottom:16px;">
+        <label class="fl">Password Admin</label>
+        <input class="fi" id="adm-pass" type="password" placeholder="Password rahasia">
+      </div>
+      <div class="ferr" id="err-admin" style="margin-bottom:12px;"></div>
+      <button class="btn-gold btn-full" onclick="doAdminLogin()">Masuk sebagai Admin</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     LOGIN / REGISTER SCREEN
+============================================================ -->
+<div class="screen" id="s-login">
+  <div class="login-wrap">
+    <div class="login-brand">
+      <div class="login-brand-name"><em>日</em>NihonGo</div>
+      <div class="login-brand-sub">ハイヤン デス · Platform Belajar Bahasa Jepang VIP</div>
+    </div>
+    <div class="login-tabs">
+      <div class="ltab active" id="ltab-masuk" onclick="switchLTab('masuk')">Masuk</div>
+      <div class="ltab" id="ltab-daftar" onclick="switchLTab('daftar')">Daftar VIP</div>
+    </div>
+    <div class="lform" id="lf-masuk">
+      <div><label class="fl">Username</label><input class="fi" id="li-user" type="text" placeholder="Username kamu"></div>
+      <div><label class="fl">Token VIP</label><input class="fi" id="li-token" type="text" placeholder="Contoh: 042" maxlength="10"></div>
+      <div class="ferr" id="err-masuk"></div>
+      <button class="btn-vred btn-full" onclick="doLogin()">Masuk ke Akun VIP</button>
+      <div class="login-footer">Belum punya token? <a onclick="showModal('modal-vip')">Daftar VIP dulu →</a></div>
+    </div>
+    <div class="lform hidden" id="lf-daftar">
+      <div><label class="fl">Token VIP (dari admin)</label><input class="fi" id="rg-token" type="text" placeholder="Contoh: 042" maxlength="3"><div class="fhint">Token 3 digit yang diberikan admin setelah verifikasi pembayaran.</div></div>
+      <div><label class="fl">Buat Username</label><input class="fi" id="rg-user" type="text" placeholder="Min. 3 karakter, tanpa spasi"><div class="fhint">Digunakan untuk login. Tidak bisa diubah.</div></div>
+      <div><label class="fl">Nama Tampil</label><input class="fi" id="rg-name" type="text" placeholder="Nama yang ditampilkan"></div>
+      <div class="ferr" id="err-daftar"></div>
+      <button class="btn-gold btn-full" onclick="doRegister()">Aktivasi Akun VIP</button>
+      <div class="login-footer">Sudah punya akun? <a onclick="switchLTab('masuk')">Masuk →</a></div>
+    </div>
+    <div style="margin-top:18px;text-align:center;">
+      <span style="font-size:11px;color:rgba(255,255,255,.12);cursor:pointer;" onclick="showScreen('s-landing')">← Kembali ke halaman utama</span>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     ADMIN PANEL
+============================================================ -->
+<div class="screen" id="s-admin">
+  <div class="admin-wrap">
+    <div class="admin-hdr">
+      <div class="admin-ttl">Panel <span>Admin</span> · ハイヤン デス</div>
+      <div style="display:flex;gap:9px;">
+        <button class="btn-sm" onclick="showScreen('s-landing')">← Landing</button>
+        <button class="btn-sm red" onclick="showScreen('s-landing')">Keluar</button>
+      </div>
+    </div>
+    <div class="admin-grid">
+      <div class="adm-card">
+        <div class="adm-card-t">Generate Token VIP Berikutnya</div>
+        <div style="text-align:center;padding:18px 0;">
+          <div class="next-tok" id="next-tok">001</div>
+          <div class="next-tok-l">Token selanjutnya</div>
+        </div>
+        <button class="btn-gold btn-full" onclick="generateToken()" style="margin-top:14px;">✦ Generate & Catat Token</button>
+        <div style="margin-top:10px;font-size:11px;color:rgba(255,255,255,.18);text-align:center;">Klik setelah konfirmasi pembayaran</div>
+      </div>
+      <div class="adm-card">
+        <div class="adm-card-t">Token yang Sudah Dibuat</div>
+        <div class="tok-list" id="tok-list"><div style="font-size:12px;color:rgba(255,255,255,.2);text-align:center;padding:20px;">Belum ada token</div></div>
+      </div>
+    </div>
+    <div class="adm-card" style="margin-bottom:18px;">
+      <div class="adm-card-t">Daftar Member</div>
+      <div style="overflow-x:auto;"><table class="mem-table"><thead><tr><th>Token</th><th>Username</th><th>Nama</th><th>Status</th></tr></thead><tbody id="mem-tbody"><tr><td colspan="4" style="text-align:center;color:rgba(255,255,255,.2);padding:18px;">Belum ada member</td></tr></tbody></table></div>
+    </div>
+    <div class="adm-card" style="margin-bottom:18px;">
+      <div class="adm-card-t">Nomor DANA</div>
+      <div class="adm-form">
+        <input class="adm-inp" id="adm-dana" placeholder="Nomor DANA kamu (081234567890)">
+        <button class="btn-sm" onclick="saveDana()">Simpan</button>
+      </div>
+      <div class="adm-note">Nomor ini ditampilkan di halaman pembayaran untuk calon member VIP.</div>
+    </div>
+    <div class="adm-card">
+      <div class="adm-card-t">Zona Berbahaya</div>
+      <button class="btn-sm red" onclick="resetData()">Reset Semua Data</button>
+      <div style="margin-top:9px;font-size:10px;color:rgba(255,255,255,.15);">Hapus semua token dan akun member.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     MAIN APP  ←←←  KONTEN ASLI NIHONGO-BELAJAR.HTML
+============================================================ -->
+<div class="screen" id="s-app">
+
+  <!-- VIP Top Bar -->
+  <nav id="vip-nav">
+    <div class="vip-nav-brand"><em>日</em>NihonGo <small>ハイヤン デス</small></div>
+    <div style="display:flex;flex:1;">
+      <div class="vip-ani active" onclick="switchVipPage('vp-main')">🏠 Beranda</div>
+      <div class="vip-ani" onclick="switchVipPage('vp-materi')">📖 Materi</div>
+      <div class="vip-ani" onclick="switchVipPage('vp-metode')">🎯 Metode</div>
+      <div class="vip-ani" onclick="switchVipPage('vp-progres')">📊 Progres</div>
+    </div>
+    <div class="vip-nav-right">
+      <div class="vip-badge-nav">👑 VIP</div>
+      <div class="vip-nav-av" id="vip-av">U</div>
+      <div class="vip-nav-un" id="vip-un">User</div>
+      <div class="vip-nav-logout" onclick="doLogout()">Keluar</div>
+    </div>
+  </nav>
+
+  <!-- HALAMAN BERANDA (hero dari nihongo-belajar.html) -->
+  <div class="vip-page active" id="vp-main">
+<!-- HERO -->
+<section id="hero">
+  <div class="sun"></div>
+
+  <!-- Floating bg kanji -->
+  <div class="bg-kanji" style="top:10%;left:5%;--rot:-12deg;animation-duration:8s;animation-delay:0s">語</div>
+  <div class="bg-kanji" style="top:60%;right:4%;--rot:8deg;animation-duration:10s;animation-delay:1s">学</div>
+  <div class="bg-kanji" style="bottom:8%;left:12%;--rot:-5deg;animation-duration:9s;animation-delay:2s">習</div>
+
+  <!-- Torii lines -->
+  <div class="torii-line" style="left:15%;top:0;height:35%;opacity:0.4"></div>
+  <div class="torii-line" style="right:15%;top:0;height:35%;opacity:0.4"></div>
+
+  <div class="hero-content">
+    <div class="hero-jp"><span>日本語</span>学習</div>
+    <div class="hero-sub">Nihongo Gakushū</div>
+    <div class="hero-desc">Belajar Bahasa Jepang<br>dari nol hingga mahir</div>
+    <div class="hero-line"></div>
+    <button class="start-btn" onclick="document.getElementById('materi').scrollIntoView({behavior:'smooth'})">
+      <span>始めましょう — Mulai Belajar</span>
+    </button>
+  </div>
+</section>
+
+<!-- NAV -->
+  </div><!-- /vp-main -->
+
+  <!-- HALAMAN MATERI -->
+  <div class="vip-page" id="vp-materi">
+<!-- MATERI LIST -->
+<div id="materi" style="background:var(--white)">
+  <div class="section">
+    <div class="section-header fade-up">
+      <div class="section-num">01</div>
+      <div class="section-title-wrap">
+        <div class="section-jp">学習教材</div>
+        <div class="section-id">Pilih Materi Pembelajaran</div>
+      </div>
+      <div class="section-line"></div>
+    </div>
+
+    <div class="materi-grid stagger">
+      <div class="materi-card fade-up" style="--i:0" onclick="openMateri('hiragana')">
+        <div class="card-num">01 — Huruf Dasar</div>
+        <div class="card-kanji">あ</div>
+        <div class="card-title">Hiragana</div>
+        <div class="card-desc">46 karakter dasar hiragana, fondasi membaca dan menulis bahasa Jepang.</div>
+        <div class="card-badge">46 Karakter + Latihan</div>
+      </div>
+      <div class="materi-card fade-up" style="--i:1" onclick="openMateri('katakana')">
+        <div class="card-num">02 — Huruf Serapan</div>
+        <div class="card-kanji">ア</div>
+        <div class="card-title">Katakana</div>
+        <div class="card-desc">46 karakter katakana untuk menulis kata serapan dan nama asing.</div>
+        <div class="card-badge">46 Karakter + Latihan</div>
+      </div>
+      <div class="materi-card fade-up" style="--i:2" onclick="openMateri('kanji')">
+        <div class="card-num">03 — Huruf Kanji</div>
+        <div class="card-kanji">漢</div>
+        <div class="card-title">Kanji N5–N4</div>
+        <div class="card-desc">Kanji JLPT level N5 dan N4 yang paling sering digunakan.</div>
+        <div class="card-badge">100+ Kanji + Latihan</div>
+      </div>
+      <div class="materi-card fade-up" style="--i:3" onclick="openMateri('kosakata')">
+        <div class="card-num">04 — Kosakata</div>
+        <div class="card-kanji">語</div>
+        <div class="card-title">Kosakata Dasar</div>
+        <div class="card-desc">Ratusan kosakata sehari-hari berdasarkan kategori tema.</div>
+        <div class="card-badge">200+ Kosakata + Latihan</div>
+      </div>
+      <div class="materi-card fade-up" style="--i:4" onclick="openMateri('grammar')">
+        <div class="card-num">05 — Tata Bahasa</div>
+        <div class="card-kanji">文</div>
+        <div class="card-title">Grammar / Tata Bahasa</div>
+        <div class="card-desc">Pola kalimat dasar, partikel, dan struktur bahasa Jepang.</div>
+        <div class="card-badge">30+ Pola Kalimat + Latihan</div>
+      </div>
+      <div class="materi-card fade-up" style="--i:5" onclick="openMateri('percakapan')">
+        <div class="card-num">06 — Percakapan</div>
+        <div class="card-kanji">話</div>
+        <div class="card-title">Percakapan Sehari-hari</div>
+        <div class="card-desc">Dialog nyata untuk sapaan, belanja, transportasi, dan lainnya.</div>
+        <div class="card-badge">15+ Dialog + Latihan</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CONTENT PANEL -->
+<!-- CONTENT PANEL -->
+<div id="content-panel"></div>
+  </div><!-- /vp-materi -->
+
+  <!-- HALAMAN METODE -->
+  <div class="vip-page" id="vp-metode">
+<!-- METHOD SECTION -->
+<section id="method">
+  <div class="method-inner">
+    <div class="section-header fade-up">
+      <div class="section-num" style="color:rgba(192,57,43,0.3)">02</div>
+      <div class="section-title-wrap">
+        <div class="section-jp" style="color:var(--white)">学習方法</div>
+        <div class="section-id" style="color:rgba(255,255,255,0.3)">Metode Pembelajaran</div>
+      </div>
+      <div class="section-line" style="background:linear-gradient(to right,rgba(192,57,43,0.3),transparent)"></div>
+    </div>
+    <div class="method-grid">
+      <div class="method-card fade-up">
+        <span class="method-icon">目</span>
+        <div class="method-num">一</div>
+        <div class="method-title">Visual Recognition</div>
+        <div class="method-desc">Kenali karakter melalui asosiasi visual. Setiap huruf dipasangkan dengan gambar mental yang membantu ingatan jangka panjang.</div>
+      </div>
+      <div class="method-card fade-up">
+        <span class="method-icon">耳</span>
+        <div class="method-num">二</div>
+        <div class="method-title">Spaced Repetition</div>
+        <div class="method-desc">Materi diulang pada interval optimal berdasarkan kurva lupa Ebbinghaus. Pelajari lebih sedikit, ingat lebih lama.</div>
+      </div>
+      <div class="method-card fade-up">
+        <span class="method-icon">手</span>
+        <div class="method-num">三</div>
+        <div class="method-title">Active Recall Quiz</div>
+        <div class="method-desc">Setiap materi diakhiri latihan soal. Bukan membaca ulang, tapi memaksa otak mengingat — cara belajar yang terbukti efektif.</div>
+      </div>
+      <div class="method-card fade-up">
+        <span class="method-icon">心</span>
+        <div class="method-num">四</div>
+        <div class="method-title">Konteks Nyata</div>
+        <div class="method-desc">Kosakata dan grammar diajarkan dalam kalimat nyata, bukan isolasi. Pahami kapan dan bagaimana menggunakannya.</div>
+      </div>
+      <div class="method-card fade-up">
+        <span class="method-icon">山</span>
+        <div class="method-num">五</div>
+        <div class="method-title">Level Bertahap</div>
+        <div class="method-desc">Dari hiragana hingga JLPT N4. Setiap level dibangun di atas fondasi sebelumnya. Tidak ada lompatan tiba-tiba.</div>
+      </div>
+      <div class="method-card fade-up">
+        <span class="method-icon">花</span>
+        <div class="method-num">六</div>
+        <div class="method-title">Progress Tracking</div>
+        <div class="method-desc">Pantau kemajuan di setiap kategori. Tahu persis di mana kamu berada dan apa yang perlu ditingkatkan.</div>
+      </div>
+    </div>
+  </div>
+  </div><!-- /vp-metode -->
+
+  <!-- HALAMAN PROGRES -->
+  <div class="vip-page" id="vp-progres">
+<!-- PROGRESS SECTION -->
+<section id="progress-section">
+  <div class="progress-inner">
+    <div class="section-header fade-up">
+      <div class="section-num">03</div>
+      <div class="section-title-wrap">
+        <div class="section-jp">進捗状況</div>
+        <div class="section-id">Progress Belajarmu</div>
+      </div>
+      <div class="section-line"></div>
+    </div>
+    <div class="progress-grid" id="prog-grid">
+      <div class="progress-item fade-up">
+        <div class="prog-label">Hiragana</div>
+        <div class="prog-bar-wrap"><div class="prog-bar" id="pb-hiragana" style="--w:0"></div></div>
+        <div class="prog-num" id="pn-hiragana">0</div>
+        <div class="prog-unit">dari 46 karakter</div>
+      </div>
+      <div class="progress-item fade-up">
+        <div class="prog-label">Katakana</div>
+        <div class="prog-bar-wrap"><div class="prog-bar" id="pb-katakana" style="--w:0"></div></div>
+        <div class="prog-num" id="pn-katakana">0</div>
+        <div class="prog-unit">dari 46 karakter</div>
+      </div>
+      <div class="progress-item fade-up">
+        <div class="prog-label">Kanji</div>
+        <div class="prog-bar-wrap"><div class="prog-bar" id="pb-kanji" style="--w:0"></div></div>
+        <div class="prog-num" id="pn-kanji">0</div>
+        <div class="prog-unit">dari 100 kanji</div>
+      </div>
+      <div class="progress-item fade-up">
+        <div class="prog-label">Kosakata</div>
+        <div class="prog-bar-wrap"><div class="prog-bar" id="pb-kosakata" style="--w:0"></div></div>
+        <div class="prog-num" id="pn-kosakata">0</div>
+        <div class="prog-unit">dari 200 kata</div>
+      </div>
+      <div class="progress-item fade-up">
+        <div class="prog-label">Grammar</div>
+        <div class="prog-bar-wrap"><div class="prog-bar" id="pb-grammar" style="--w:0"></div></div>
+        <div class="prog-num" id="pn-grammar">0</div>
+        <div class="prog-unit">dari 30 pola</div>
+      </div>
+      <div class="progress-item fade-up">
+        <div class="prog-label">Percakapan</div>
+        <div class="prog-bar-wrap"><div class="prog-bar" id="pb-percakapan" style="--w:0"></div></div>
+        <div class="prog-num" id="pn-percakapan">0</div>
+        <div class="prog-unit">dari 15 dialog</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<!-- FOOTER -->
+<footer>
+  <div class="footer-jp">日本語学習</div>
+  <div class="footer-sub">Nihongo Gakushū · Belajar Bahasa Jepang</div>
+</footer>
+
+  </div><!-- /vp-progres -->
+
+</div><!-- /s-app -->
+
+<script>
+/* ============================================================
+   VIP STORAGE KEYS
+============================================================ */
+const VK = { tokens:'hd_tokens', users:'hd_users', progress:'hd_progress', counter:'hd_counter', dana:'hd_dana' };
+function vgs(k){ return JSON.parse(localStorage.getItem(k)||'null'); }
+function vss(k,v){ localStorage.setItem(k, JSON.stringify(v)); }
+function getTokens(){ return vgs(VK.tokens)||{}; }
+function getUsers(){  return vgs(VK.users)||{}; }
+function getCounter(){ return vgs(VK.counter)||1; }
+
+/* ============================================================
+   SCREEN SYSTEM
+============================================================ */
+function showScreen(id){
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo(0,0);
 }
-.btn-red:hover{background:var(--red-l);}
-.btn-ghost{
-  padding:13px 36px;background:transparent;
-  border:1px solid rgba(255,255,255,.12);color:rgba(255,255,255,.4);
-  font-family:'Plus Jakarta Sans',sans-serif;font-size:12px;letter-spacing:2px;
-  text-transform:uppercase;cursor:pointer;transition:all .2s;
-}
-.btn-ghost:hover{border-color:var(--gold);color:var(--gold);}
-.btn-full{width:100%;}
+// Auto-dismiss loader
+setTimeout(() => showScreen('s-landing'), 2400);
 
-/* How it works */
-.steps-section{background:rgba(255,255,255,.02);padding:80px 24px;border-top:1px solid rgba(212,160,23,.1);}
-.steps-inner{max-width:900px;margin:0 auto;}
-.sec-eyebrow{font-size:10px;letter-spacing:5px;text-transform:uppercase;color:rgba(255,255,255,.25);margin-bottom:12px;text-align:center;}
-.sec-title{font-family:'Noto Serif JP',serif;font-size:28px;text-align:center;margin-bottom:60px;font-weight:300;}
-.sec-title span{color:var(--gold);}
-.steps-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:rgba(212,160,23,.1);border:1px solid rgba(212,160,23,.1);}
-.step-card{background:var(--black);padding:32px 24px;position:relative;overflow:hidden;}
-.step-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--gold);transform:scaleX(0);transform-origin:left;transition:transform .4s;}
-.step-card:hover::after{transform:scaleX(1);}
-.step-num{font-family:'Noto Serif JP',serif;font-size:52px;color:rgba(212,160,23,.15);font-weight:300;line-height:1;margin-bottom:16px;}
-.step-title{font-size:14px;font-weight:600;margin-bottom:8px;color:var(--white);}
-.step-desc{font-size:12px;color:rgba(255,255,255,.35);line-height:1.8;}
-.step-icon{font-size:24px;margin-bottom:12px;display:block;}
+/* ============================================================
+   MODAL
+============================================================ */
+function showModal(id){ document.getElementById(id).classList.add('active'); }
+function hideModal(id){ document.getElementById(id).classList.remove('active'); }
+document.querySelectorAll('.overlay').forEach(o => {
+  o.addEventListener('click', e => { if(e.target===o) o.classList.remove('active'); });
+});
 
-/* ===== PAYMENT MODAL OVERLAY ===== */
-.overlay{
-  position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:200;
-  display:none;align-items:center;justify-content:center;padding:20px;
-}
-.overlay.active{display:flex;}
-
-.modal{
-  background:#111;border:1px solid rgba(212,160,23,.25);
-  width:100%;max-width:460px;max-height:90vh;overflow-y:auto;
-  position:relative;
-  animation:modalIn .4s cubic-bezier(.22,1,.36,1);
-}
-@keyframes modalIn{from{opacity:0;transform:translateY(30px);}to{opacity:1;transform:translateY(0);}}
-.modal-head{
-  padding:24px 28px;border-bottom:1px solid rgba(255,255,255,.07);
-  display:flex;align-items:center;justify-content:space-between;
-}
-.modal-title{font-size:16px;font-weight:600;}
-.modal-title span{color:var(--gold);}
-.modal-close{background:none;border:none;color:rgba(255,255,255,.3);font-size:20px;cursor:pointer;transition:color .2s;}
-.modal-close:hover{color:var(--white);}
-.modal-body{padding:28px;}
-
-.payment-steps{display:flex;flex-direction:column;gap:20px;margin-bottom:28px;}
-.pay-step{display:flex;gap:16px;align-items:flex-start;}
-.pay-step-num{
-  width:28px;height:28px;border-radius:50%;background:var(--gold);
-  color:var(--black);font-size:12px;font-weight:700;
-  display:flex;align-items:center;justify-content:center;flex-shrink:0;
-}
-.pay-step-text{font-size:13px;color:rgba(255,255,255,.6);line-height:1.7;}
-.pay-step-text strong{color:var(--white);}
-
-.dana-box{
-  background:rgba(0,120,255,.08);border:1px solid rgba(0,120,255,.2);
-  padding:20px;margin:20px 0;text-align:center;
-}
-.dana-logo{font-size:28px;margin-bottom:8px;}
-.dana-num{font-size:24px;font-weight:700;letter-spacing:3px;color:#5b9ef4;margin-bottom:4px;}
-.dana-name{font-size:12px;color:rgba(255,255,255,.4);}
-
-.amount-box{
-  background:rgba(212,160,23,.08);border:1px solid rgba(212,160,23,.2);
-  padding:16px;text-align:center;margin-bottom:20px;
-}
-.amount-num{font-size:36px;font-weight:700;color:var(--gold);}
-.amount-lbl{font-size:11px;color:rgba(255,255,255,.3);letter-spacing:2px;text-transform:uppercase;}
-
-.copy-btn{
-  background:none;border:1px solid rgba(0,120,255,.3);color:#5b9ef4;
-  font-size:11px;letter-spacing:2px;padding:6px 16px;cursor:pointer;
-  transition:all .2s;margin-top:8px;
-}
-.copy-btn:hover{background:rgba(0,120,255,.1);}
-
-.confirm-note{
-  font-size:12px;color:rgba(255,255,255,.3);line-height:1.8;
-  border-top:1px solid rgba(255,255,255,.07);padding-top:16px;margin-top:20px;
+/* ============================================================
+   TOAST
+============================================================ */
+function showToast(msg){
+  const t = document.getElementById('vtoast');
+  t.textContent = msg; t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2800);
 }
 
-/* ===== REGISTER MODAL ===== */
-.form-group{margin-bottom:18px;}
-.form-label{display:block;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:8px;}
-.form-input{
-  width:100%;padding:13px 16px;background:rgba(255,255,255,.04);
-  border:1px solid rgba(255,255,255,.1);color:var(--white);
-  font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;outline:none;transition:border-color .2s;
-}
-.form-input:focus{border-color:var(--gold);}
-.form-input::placeholder{color:rgba(255,255,255,.15);}
-.form-hint{font-size:11px;color:rgba(255,255,255,.25);margin-top:6px;line-height:1.6;}
-
-.token-display{
-  background:rgba(212,160,23,.08);border:2px solid rgba(212,160,23,.3);
-  padding:20px;text-align:center;margin:20px 0;
-}
-.token-num{font-family:'Noto Serif JP',serif;font-size:56px;color:var(--gold);letter-spacing:12px;font-weight:300;}
-.token-lbl{font-size:10px;letter-spacing:4px;text-transform:uppercase;color:rgba(255,255,255,.25);margin-top:4px;}
-
-/* ===== LOGIN SCREEN ===== */
-#s-login{background:var(--black);display:flex;align-items:center;justify-content:center;}
-.login-wrap{
-  width:100%;max-width:420px;padding:24px;
-  animation:slideUp .8s ease forwards;
-}
-.login-brand{text-align:center;margin-bottom:40px;}
-.login-brand-name{font-family:'Noto Serif JP',serif;font-size:36px;font-weight:300;}
-.login-brand-name em{color:var(--red);font-style:normal;}
-.login-brand-sub{font-size:11px;letter-spacing:4px;color:rgba(255,255,255,.2);text-transform:uppercase;margin-top:6px;}
-
-.login-tabs{display:flex;border-bottom:1px solid rgba(255,255,255,.08);margin-bottom:28px;}
-.ltab{
-  flex:1;padding:12px;text-align:center;font-size:11px;letter-spacing:2px;
-  text-transform:uppercase;color:rgba(255,255,255,.25);cursor:pointer;
-  border-bottom:2px solid transparent;margin-bottom:-1px;transition:all .2s;
-}
-.ltab.active{color:var(--gold);border-bottom-color:var(--gold);}
-
-.login-form,.register-form{display:flex;flex-direction:column;gap:16px;}
-.login-form.hidden,.register-form.hidden{display:none;}
-
-.form-err{
-  font-size:12px;color:var(--red-l);padding:10px 14px;
-  background:rgba(192,57,43,.1);border-left:2px solid var(--red);display:none;
+/* ============================================================
+   DANA
+============================================================ */
+(function(){ const d = vgs(VK.dana); if(d) document.getElementById('dana-num-display').textContent = d; })();
+function copyDana(){
+  const n = vgs(VK.dana)||'';
+  if(!n){ showToast('Nomor DANA belum diatur admin.'); return; }
+  navigator.clipboard.writeText(n).catch(()=>{});
+  showToast('Nomor DANA disalin!');
 }
 
-.login-footer{margin-top:24px;text-align:center;font-size:12px;color:rgba(255,255,255,.2);}
-.login-footer a{color:var(--gold);cursor:pointer;text-decoration:none;}
-
-/* ===== MAIN APP ===== */
-#s-app{background:var(--white);}
-
-/* Top nav */
-#app-nav{
-  height:60px;background:var(--black);
-  border-bottom:1px solid rgba(192,57,43,.2);
-  display:flex;align-items:center;padding:0 28px;gap:0;
-  position:sticky;top:0;z-index:50;
+/* ============================================================
+   AUTH TABS
+============================================================ */
+function switchLTab(t){
+  ['masuk','daftar'].forEach(tab => {
+    document.getElementById('ltab-'+tab).classList.toggle('active', tab===t);
+    document.getElementById('lf-'+tab).classList.toggle('hidden', tab!==t);
+  });
 }
-.app-brand{font-family:'Noto Serif JP',serif;color:var(--white);font-size:20px;margin-right:32px;font-weight:300;}
-.app-brand em{color:var(--red);font-style:normal;}
-.app-nav-items{display:flex;gap:0;flex:1;}
-.ani{
-  height:60px;padding:0 20px;display:flex;align-items:center;gap:8px;
-  font-size:12px;letter-spacing:1px;color:rgba(255,255,255,.4);cursor:pointer;
-  border-bottom:2px solid transparent;transition:all .2s;white-space:nowrap;
+function showErr(id,msg){ const el=document.getElementById(id); el.style.display='block'; el.textContent=msg; }
+function hideErr(id){ document.getElementById(id).style.display='none'; }
+
+/* ============================================================
+   AUTH
+============================================================ */
+let CU = null;
+
+function doLogin(){
+  hideErr('err-masuk');
+  const username = document.getElementById('li-user').value.trim();
+  const token    = document.getElementById('li-token').value.trim();
+  if(!username||!token){ showErr('err-masuk','Isi username dan token.'); return; }
+
+  // AKUN ADMIN TERSEMBUNYI
+  if(username === 'Aqil Hayyan' && token === 'Admin123'){
+    showScreen('s-admin'); refreshAdmin(); return;
+  }
+
+  const ukey  = username.toLowerCase();
+  const users = getUsers();
+  if(!users[ukey]){ showErr('err-masuk','Username tidak ditemukan.'); return; }
+  if(users[ukey].token !== token.padStart(3,'0')){ showErr('err-masuk','Token tidak cocok.'); return; }
+  loginAs(ukey, users[ukey].name, users[ukey].token);
 }
-.ani:hover{color:rgba(255,255,255,.7);}
-.ani.active{color:var(--red);border-bottom-color:var(--red);}
-.ani-icon{font-size:14px;}
 
-.nav-right{margin-left:auto;display:flex;align-items:center;gap:12px;}
-.vip-badge-nav{
-  display:flex;align-items:center;gap:6px;padding:5px 12px;
-  background:rgba(212,160,23,.1);border:1px solid rgba(212,160,23,.3);
-  font-size:10px;letter-spacing:2px;color:var(--gold);text-transform:uppercase;
+function doRegister(){
+  hideErr('err-daftar');
+  const token    = document.getElementById('rg-token').value.trim().padStart(3,'0');
+  const username = document.getElementById('rg-user').value.trim().toLowerCase().replace(/\s/g,'');
+  const name     = document.getElementById('rg-name').value.trim();
+  if(!token||!username||!name){ showErr('err-daftar','Isi semua kolom.'); return; }
+  if(username.length<3){ showErr('err-daftar','Username minimal 3 karakter.'); return; }
+  if(!/^\d{3}$/.test(token)){ showErr('err-daftar','Token harus 3 digit angka.'); return; }
+  const tokens = getTokens(); const users = getUsers();
+  if(!tokens[token]){ showErr('err-daftar','Token tidak valid atau belum diterbitkan admin.'); return; }
+  if(tokens[token].used){ showErr('err-daftar','Token sudah digunakan.'); return; }
+  if(users[username]){ showErr('err-daftar','Username sudah dipakai.'); return; }
+  tokens[token].used = true; tokens[token].username = username;
+  users[username] = { name, token };
+  vss(VK.tokens, tokens); vss(VK.users, users);
+  showToast('Akun VIP berhasil dibuat!');
+  switchLTab('masuk');
+  document.getElementById('li-user').value = username;
+  document.getElementById('li-token').value = token;
 }
-.nav-avatar{
-  width:32px;height:32px;border-radius:50%;background:var(--red);
-  display:flex;align-items:center;justify-content:center;
-  font-size:13px;color:#fff;font-weight:700;
+
+function loginAs(username, name, token){
+  CU = { username, name, token };
+  document.getElementById('vip-av').textContent = name.charAt(0).toUpperCase();
+  document.getElementById('vip-un').textContent = name;
+  // Update hero greeting in old content
+  const hd = document.querySelector('#vp-main .hero-desc');
+  if(hd) hd.innerHTML = `Selamat datang, <strong>${name}</strong>!<br>Token VIP kamu: <span style="color:var(--gold);font-family:'Noto Serif JP',serif">${token}</span>`;
+  showScreen('s-app');
+  switchVipPage('vp-main');
+  // Load saved progress
+  loadSavedProgress();
 }
-.nav-uname{font-size:12px;color:rgba(255,255,255,.4);}
-.nav-logout{
-  font-size:11px;color:rgba(255,255,255,.2);cursor:pointer;
-  padding:5px 10px;border:1px solid rgba(255,255,255,.08);transition:all .2s;
+
+function doLogout(){ CU = null; showScreen('s-landing'); }
+
+/* ============================================================
+   SECRET ADMIN ACCESS
+============================================================ */
+const SECRET = '#nihongo-admin-rahasia';
+function checkHash(){
+  if(window.location.hash === SECRET){
+    history.replaceState(null,'',window.location.pathname);
+    showModal('modal-admin');
+  }
 }
-.nav-logout:hover{color:var(--red);border-color:var(--red);}
+window.addEventListener('load', checkHash);
+window.addEventListener('hashchange', checkHash);
+// Ketuk brand 7x
+let tapC=0, tapT=null;
+document.addEventListener('DOMContentLoaded', () => {
+  const b = document.querySelector('.login-brand-name');
+  if(b){ b.addEventListener('click', () => { tapC++; clearTimeout(tapT); tapT=setTimeout(()=>tapC=0,1800); if(tapC>=7){ tapC=0; showModal('modal-admin'); } }); }
+});
 
-/* Pages */
-.apage{display:none;}
-.apage.active{display:block;}
-
-/* Beranda */
-.beranda-wrap{min-height:calc(100vh - 60px);background:var(--black);}
-.beranda-hero{
-  padding:80px 24px 60px;text-align:center;position:relative;overflow:hidden;
-  background:linear-gradient(180deg,rgba(192,57,43,.05) 0%,transparent 100%);
+/* ============================================================
+   ADMIN
+============================================================ */
+function doAdminLogin(){
+  hideErr('err-admin');
+  if(document.getElementById('adm-pass').value !== 'admin123'){ showErr('err-admin','Password salah.'); return; }
+  hideModal('modal-admin');
+  showScreen('s-admin');
+  refreshAdmin();
 }
-.bh-greeting{font-size:12px;letter-spacing:4px;color:rgba(255,255,255,.25);text-transform:uppercase;margin-bottom:12px;}
-.bh-title{font-family:'Noto Serif JP',serif;font-size:clamp(32px,6vw,60px);font-weight:300;margin-bottom:12px;}
-.bh-title em{color:var(--red);font-style:normal;}
-.bh-sub{font-size:14px;color:rgba(255,255,255,.3);max-width:400px;margin:0 auto 32px;line-height:1.8;}
 
-.vip-info-bar{
-  max-width:700px;margin:0 auto;padding:0 24px;
-  display:grid;grid-template-columns:repeat(3,1fr);gap:2px;
-  background:rgba(212,160,23,.15);border:1px solid rgba(212,160,23,.2);
+function refreshAdmin(){
+  const tokens=getTokens(); const users=getUsers(); const ctr=getCounter();
+  document.getElementById('next-tok').textContent = String(ctr).padStart(3,'0');
+  const tl = document.getElementById('tok-list'); const tk = Object.keys(tokens);
+  tl.innerHTML = tk.length ? tk.map(t=>`<div class="tok-item"><span class="ti-t">${t}</span><span class="ti-u">${tokens[t].username||'Belum dipakai'}</span><span class="ti-s ${tokens[t].used?'yes':'no'}">${tokens[t].used?'✓ Terpakai':'○ Tersedia'}</span></div>`).join('') : '<div style="font-size:12px;color:rgba(255,255,255,.2);text-align:center;padding:18px;">Belum ada token</div>';
+  const uk=Object.keys(users); const tb=document.getElementById('mem-tbody');
+  tb.innerHTML = uk.length ? uk.map(u=>`<tr><td style="font-family:'Noto Serif JP',serif;font-size:17px;letter-spacing:4px;color:var(--gold)">${users[u].token}</td><td>${u}</td><td>${users[u].name}</td><td><span class="badge-vip">VIP</span></td></tr>`).join('') : '<tr><td colspan="4" style="text-align:center;color:rgba(255,255,255,.2);padding:16px;">Belum ada member</td></tr>';
+  const dn=vgs(VK.dana)||''; document.getElementById('adm-dana').value=dn;
+  if(dn) document.getElementById('dana-num-display').textContent=dn;
 }
-.vib-item{background:var(--black);padding:24px 20px;text-align:center;}
-.vib-num{font-family:'Noto Serif JP',serif;font-size:32px;color:var(--gold);}
-.vib-lbl{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.2);margin-top:4px;}
 
-.quick-access{max-width:900px;margin:0 auto;padding:60px 24px;}
-.qa-title{font-size:10px;letter-spacing:4px;text-transform:uppercase;color:rgba(255,255,255,.2);margin-bottom:20px;}
-.qa-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:rgba(192,57,43,.12);border:1px solid rgba(192,57,43,.15);}
-.qa-card{
-  background:rgba(255,255,255,.02);padding:28px 24px;cursor:pointer;
-  transition:background .2s;position:relative;overflow:hidden;
+function generateToken(){
+  const ctr=getCounter(); if(ctr>999){ showToast('Token habis (001–999)!'); return; }
+  const tn=String(ctr).padStart(3,'0'); const tokens=getTokens();
+  tokens[tn]={used:false,username:null}; vss(VK.tokens,tokens); vss(VK.counter,ctr+1);
+  showToast(`Token ${tn} berhasil dibuat!`); refreshAdmin();
 }
-.qa-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--red);transform:scaleX(0);transform-origin:left;transition:transform .3s;}
-.qa-card:hover::after{transform:scaleX(1);}
-.qa-card:hover{background:rgba(192,57,43,.06);}
-.qa-icon{font-size:28px;margin-bottom:12px;display:block;}
-.qa-name{font-size:15px;color:var(--white);margin-bottom:4px;font-weight:500;}
-.qa-desc{font-size:11px;color:rgba(255,255,255,.28);line-height:1.7;}
 
-/* Materi page */
-#ap-materi{background:var(--white);min-height:calc(100vh - 60px);}
-.page-header{background:var(--black);padding:40px 28px;border-bottom:1px solid rgba(192,57,43,.15);}
-.ph-ey{font-size:10px;letter-spacing:5px;text-transform:uppercase;color:rgba(255,255,255,.2);margin-bottom:8px;}
-.ph-t{font-family:'Noto Serif JP',serif;font-size:28px;font-weight:300;color:var(--white);}
-.ph-t em{color:var(--red);font-style:normal;}
-.ph-s{font-size:13px;color:rgba(255,255,255,.25);margin-top:6px;line-height:1.7;}
-
-.materi-layout{display:grid;grid-template-columns:220px 1fr;max-width:1100px;margin:0 auto;}
-.msidebar{border-right:1px solid var(--border);padding:20px 0;position:sticky;top:60px;height:calc(100vh - 60px);overflow-y:auto;}
-.msl{font-size:9px;letter-spacing:4px;text-transform:uppercase;color:var(--gray);padding:0 20px;margin:16px 0 6px;}
-.msl:first-child{margin-top:0;}
-.msi{
-  display:flex;align-items:center;gap:10px;padding:11px 20px;cursor:pointer;
-  font-size:13px;color:var(--gray);border-left:2px solid transparent;transition:all .2s;
+function saveDana(){
+  const v=document.getElementById('adm-dana').value.trim();
+  if(!v){ showToast('Masukkan nomor DANA.'); return; }
+  vss(VK.dana,v); document.getElementById('dana-num-display').textContent=v; showToast('Nomor DANA disimpan!');
 }
-.msi:hover{color:var(--ink);background:var(--cream);}
-.msi.active{color:var(--red);border-left-color:var(--red);background:rgba(192,57,43,.04);}
-.msi-badge{margin-left:auto;font-size:9px;padding:2px 7px;background:rgba(192,57,43,.1);color:var(--red);}
-.msi.active .msi-badge{background:var(--red);color:#fff;}
 
-.mcontent{padding:36px 40px;}
-.mc-h{margin-bottom:28px;}
-.mc-t{font-family:'Noto Serif JP',serif;font-size:24px;font-weight:400;color:var(--ink);}
-.mc-t span{color:var(--red);font-size:16px;margin-right:8px;}
-.mc-d{font-size:13px;color:var(--gray);margin-top:6px;line-height:1.7;}
+function resetData(){
+  if(!confirm('YAKIN? Semua token dan akun akan dihapus!')) return;
+  [VK.tokens,VK.users,VK.progress,VK.counter].forEach(k=>localStorage.removeItem(k));
+  showToast('Data direset.'); refreshAdmin();
+}
 
-.char-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(85px,1fr));gap:2px;background:var(--border);border:1px solid var(--border);margin-bottom:32px;}
-.cc{background:var(--white);padding:18px 6px;text-align:center;cursor:pointer;transition:background .2s;}
-.cc:hover{background:var(--red);}
-.cc:hover .cj,.cc:hover .cr{color:#fff!important;}
-.cj{font-family:'Noto Serif JP',serif;font-size:28px;display:block;color:var(--ink);line-height:1.2;}
-.cr{font-size:10px;letter-spacing:1px;display:block;margin-top:3px;color:var(--gray);}
+/* ============================================================
+   VIP PAGE NAVIGATION
+============================================================ */
+function switchVipPage(id){
+  document.querySelectorAll('.vip-page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.vip-ani').forEach(n => n.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  const map = {'vp-main':0,'vp-materi':1,'vp-metode':2,'vp-progres':3};
+  const navs = document.querySelectorAll('.vip-ani');
+  if(map[id]!==undefined) navs[map[id]].classList.add('active');
+  // Scroll inside current vip-page to top
+  const pg = document.getElementById(id);
+  if(pg) pg.scrollTop=0;
+  window.scrollTo(0,0);
+  // Re-trigger fade-up for current page
+  setTimeout(() => {
+    document.querySelectorAll(`#${id} .fade-up`).forEach(el => el.classList.add('visible'));
+  }, 100);
+  if(id==='vp-progres') loadSavedProgress();
+}
 
-.vtable{width:100%;border-collapse:collapse;margin-bottom:28px;}
-.vtable th{background:var(--black);color:rgba(255,255,255,.6);font-size:9px;letter-spacing:3px;text-transform:uppercase;padding:12px 16px;text-align:left;font-weight:400;}
-.vtable td{padding:13px 16px;border-bottom:1px solid var(--border);font-size:13px;}
-.vtable tr:hover td{background:rgba(192,57,43,.03);}
-.td-jp{font-family:'Noto Serif JP',serif;font-size:18px;}
-.td-ro{color:var(--red);font-size:12px;}
-.td-id{color:var(--ink);}
-.td-ex{font-size:11px;color:var(--gray);font-style:italic;}
+/* ============================================================
+   LOAD SAVED PROGRESS (syncs with VIP storage)
+============================================================ */
+function loadSavedProgress(){
+  if(!CU) return;
+  const saved = (vgs(VK.progress)||{})[CU.username]||{};
+  Object.keys(saved).forEach(key => {
+    // Merge into old progress object
+    if(typeof progress !== 'undefined') progress[key] = saved[key];
+  });
+}
 
-.gram-card{border-left:3px solid var(--red);background:var(--cream);padding:20px 22px;margin-bottom:12px;}
-.gc-p{font-family:'Noto Serif JP',serif;font-size:17px;margin-bottom:5px;color:var(--ink);}
-.gc-m{font-size:13px;color:var(--gray);}
-.gc-e{font-size:13px;margin-top:10px;padding-top:10px;border-top:1px solid rgba(0,0,0,.07);color:var(--ink);}
 
-.dial-card{border:1px solid var(--border);margin-bottom:16px;overflow:hidden;}
-.dial-head{background:var(--black);padding:12px 18px;}
-.dial-ht{font-size:12px;color:rgba(255,255,255,.5);letter-spacing:1px;}
-.dial-body{padding:18px;display:flex;flex-direction:column;gap:12px;}
-.dl-who{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--red);}
-.dl-jp{font-family:'Noto Serif JP',serif;font-size:15px;color:var(--ink);}
-.dl-tr{font-size:11px;color:var(--gray);margin-top:2px;}
+/* ===== DATA ===== */
+const DATA = {
+  hiragana: {
+    title: 'Hiragana', jp: 'ひらがな',
+    chars: [
+      {jp:'あ',ro:'a'},{jp:'い',ro:'i'},{jp:'う',ro:'u'},{jp:'え',ro:'e'},{jp:'お',ro:'o'},
+      {jp:'か',ro:'ka'},{jp:'き',ro:'ki'},{jp:'く',ro:'ku'},{jp:'け',ro:'ke'},{jp:'こ',ro:'ko'},
+      {jp:'さ',ro:'sa'},{jp:'し',ro:'shi'},{jp:'す',ro:'su'},{jp:'せ',ro:'se'},{jp:'そ',ro:'so'},
+      {jp:'た',ro:'ta'},{jp:'ち',ro:'chi'},{jp:'つ',ro:'tsu'},{jp:'て',ro:'te'},{jp:'と',ro:'to'},
+      {jp:'な',ro:'na'},{jp:'に',ro:'ni'},{jp:'ぬ',ro:'nu'},{jp:'ね',ro:'ne'},{jp:'の',ro:'no'},
+      {jp:'は',ro:'ha'},{jp:'ひ',ro:'hi'},{jp:'ふ',ro:'fu'},{jp:'へ',ro:'he'},{jp:'ほ',ro:'ho'},
+      {jp:'ま',ro:'ma'},{jp:'み',ro:'mi'},{jp:'む',ro:'mu'},{jp:'め',ro:'me'},{jp:'も',ro:'mo'},
+      {jp:'や',ro:'ya'},{jp:'ゆ',ro:'yu'},{jp:'よ',ro:'yo'},
+      {jp:'ら',ro:'ra'},{jp:'り',ro:'ri'},{jp:'る',ro:'ru'},{jp:'れ',ro:'re'},{jp:'ろ',ro:'ro'},
+      {jp:'わ',ro:'wa'},{jp:'を',ro:'wo'},{jp:'ん',ro:'n'}
+    ],
+    quiz: [
+      {q:'あ',type:'char',choices:['a','i','u','e'],answer:'a'},
+      {q:'い',type:'char',choices:['ka','i','sa','na'],answer:'i'},
+      {q:'う',type:'char',choices:['u','o','e','a'],answer:'u'},
+      {q:'か',type:'char',choices:['ha','ma','ka','ra'],answer:'ka'},
+      {q:'さ',type:'char',choices:['ta','sa','na','ya'],answer:'sa'},
+      {q:'た',type:'char',choices:['ta','ka','sa','ma'],answer:'ta'},
+      {q:'な',type:'char',choices:['ha','ra','na','wa'],answer:'na'},
+      {q:'は',type:'char',choices:['ha','ma','pa','ba'],answer:'ha'},
+      {q:'ま',type:'char',choices:['ya','na','ma','ra'],answer:'ma'},
+      {q:'ん',type:'char',choices:['n','wa','wo','ya'],answer:'n'},
+    ]
+  },
+  katakana: {
+    title: 'Katakana', jp: 'カタカナ',
+    chars: [
+      {jp:'ア',ro:'a'},{jp:'イ',ro:'i'},{jp:'ウ',ro:'u'},{jp:'エ',ro:'e'},{jp:'オ',ro:'o'},
+      {jp:'カ',ro:'ka'},{jp:'キ',ro:'ki'},{jp:'ク',ro:'ku'},{jp:'ケ',ro:'ke'},{jp:'コ',ro:'ko'},
+      {jp:'サ',ro:'sa'},{jp:'シ',ro:'shi'},{jp:'ス',ro:'su'},{jp:'セ',ro:'se'},{jp:'ソ',ro:'so'},
+      {jp:'タ',ro:'ta'},{jp:'チ',ro:'chi'},{jp:'ツ',ro:'tsu'},{jp:'テ',ro:'te'},{jp:'ト',ro:'to'},
+      {jp:'ナ',ro:'na'},{jp:'ニ',ro:'ni'},{jp:'ヌ',ro:'nu'},{jp:'ネ',ro:'ne'},{jp:'ノ',ro:'no'},
+      {jp:'ハ',ro:'ha'},{jp:'ヒ',ro:'hi'},{jp:'フ',ro:'fu'},{jp:'ヘ',ro:'he'},{jp:'ホ',ro:'ho'},
+      {jp:'マ',ro:'ma'},{jp:'ミ',ro:'mi'},{jp:'ム',ro:'mu'},{jp:'メ',ro:'me'},{jp:'モ',ro:'mo'},
+      {jp:'ヤ',ro:'ya'},{jp:'ユ',ro:'yu'},{jp:'ヨ',ro:'yo'},
+      {jp:'ラ',ro:'ra'},{jp:'リ',ro:'ri'},{jp:'ル',ro:'ru'},{jp:'レ',ro:'re'},{jp:'ロ',ro:'ro'},
+      {jp:'ワ',ro:'wa'},{jp:'ヲ',ro:'wo'},{jp:'ン',ro:'n'}
+    ],
+    quiz: [
+      {q:'ア',type:'char',choices:['a','i','u','e'],answer:'a'},
+      {q:'イ',type:'char',choices:['ka','i','sa','na'],answer:'i'},
+      {q:'ウ',type:'char',choices:['u','o','e','a'],answer:'u'},
+      {q:'カ',type:'char',choices:['ha','ma','ka','ra'],answer:'ka'},
+      {q:'サ',type:'char',choices:['ta','sa','na','ya'],answer:'sa'},
+      {q:'タ',type:'char',choices:['ta','ka','sa','ma'],answer:'ta'},
+      {q:'ナ',type:'char',choices:['ha','ra','na','wa'],answer:'na'},
+      {q:'ハ',type:'char',choices:['ha','ma','pa','ba'],answer:'ha'},
+      {q:'マ',type:'char',choices:['ya','na','ma','ra'],answer:'ma'},
+      {q:'ン',type:'char',choices:['n','wa','wo','ya'],answer:'n'},
+    ]
+  },
+  kanji: {
+    title: 'Kanji N5–N4', jp: '漢字',
+    vocab: [
+      {jp:'日',ro:'nichi / hi',id:'Matahari / Hari',ex:'日本語 — Nihongo (Bahasa Jepang)'},
+      {jp:'本',ro:'hon / moto',id:'Buku / Asal',ex:'日本 — Nihon (Jepang)'},
+      {jp:'人',ro:'jin / hito',id:'Orang',ex:'日本人 — Nihonjin (Orang Jepang)'},
+      {jp:'山',ro:'yama / san',id:'Gunung',ex:'富士山 — Fujisan (Gunung Fuji)'},
+      {jp:'川',ro:'kawa',id:'Sungai',ex:'川があります — Ada sungai'},
+      {jp:'水',ro:'mizu / sui',id:'Air',ex:'水を飲む — Minum air'},
+      {jp:'火',ro:'hi / ka',id:'Api',ex:'火曜日 — Kayōbi (Selasa)'},
+      {jp:'土',ro:'tsuchi / do',id:'Tanah',ex:'土曜日 — Doyōbi (Sabtu)'},
+      {jp:'木',ro:'ki / moku',id:'Pohon / Kayu',ex:'木曜日 — Mokuyōbi (Kamis)'},
+      {jp:'金',ro:'kin / kane',id:'Emas / Uang',ex:'金曜日 — Kin\'yōbi (Jumat)'},
+      {jp:'大',ro:'dai / ōki',id:'Besar',ex:'大学 — Daigaku (Universitas)'},
+      {jp:'小',ro:'shō / chii',id:'Kecil',ex:'小さい — Chiisai (Kecil)'},
+      {jp:'中',ro:'chū / naka',id:'Tengah / Dalam',ex:'中国 — Chūgoku (China)'},
+      {jp:'上',ro:'jō / ue',id:'Atas',ex:'机の上 — Di atas meja'},
+      {jp:'下',ro:'ka / shita',id:'Bawah',ex:'机の下 — Di bawah meja'},
+    ],
+    quiz: [
+      {q:'日',type:'char',choices:['Matahari','Gunung','Air','Api'],answer:'Matahari'},
+      {q:'山',type:'char',choices:['Sungai','Gunung','Angin','Langit'],answer:'Gunung'},
+      {q:'水',type:'char',choices:['Api','Tanah','Air','Angin'],answer:'Air'},
+      {q:'大',type:'char',choices:['Kecil','Besar','Tengah','Bawah'],answer:'Besar'},
+      {q:'上',type:'char',choices:['Bawah','Tengah','Atas','Samping'],answer:'Atas'},
+      {q:'人',type:'char',choices:['Hewan','Orang','Benda','Tempat'],answer:'Orang'},
+      {q:'木',type:'char',choices:['Batu','Air','Pohon','Api'],answer:'Pohon'},
+      {q:'金',type:'char',choices:['Besi','Perak','Emas','Kayu'],answer:'Emas'},
+    ]
+  },
+  kosakata: {
+    title: 'Kosakata Dasar', jp: '語彙',
+    tabs: [
+      {
+        label: 'Angka',
+        vocab: [
+          {jp:'一 (いち)',ro:'ichi',id:'Satu',ex:'一つください — Satu tolong'},
+          {jp:'二 (に)',ro:'ni',id:'Dua',ex:'二枚 — Dua lembar'},
+          {jp:'三 (さん)',ro:'san',id:'Tiga',ex:'三時 — Jam tiga'},
+          {jp:'四 (し/よん)',ro:'shi / yon',id:'Empat',ex:'四月 — April'},
+          {jp:'五 (ご)',ro:'go',id:'Lima',ex:'五分 — Lima menit'},
+          {jp:'六 (ろく)',ro:'roku',id:'Enam',ex:'六時 — Jam enam'},
+          {jp:'七 (しち/なな)',ro:'shichi / nana',id:'Tujuh',ex:'七日 — Tujuh hari'},
+          {jp:'八 (はち)',ro:'hachi',id:'Delapan',ex:'八月 — Agustus'},
+          {jp:'九 (く/きゅう)',ro:'ku / kyū',id:'Sembilan',ex:'九時 — Jam sembilan'},
+          {jp:'十 (じゅう)',ro:'jū',id:'Sepuluh',ex:'十月 — Oktober'},
+        ]
+      },
+      {
+        label: 'Warna',
+        vocab: [
+          {jp:'赤 (あか)',ro:'aka',id:'Merah',ex:'赤いバラ — Mawar merah'},
+          {jp:'青 (あお)',ro:'ao',id:'Biru / Hijau',ex:'青い空 — Langit biru'},
+          {jp:'白 (しろ)',ro:'shiro',id:'Putih',ex:'白い雪 — Salju putih'},
+          {jp:'黒 (くろ)',ro:'kuro',id:'Hitam',ex:'黒い猫 — Kucing hitam'},
+          {jp:'黄色 (きいろ)',ro:'kiiro',id:'Kuning',ex:'黄色い花 — Bunga kuning'},
+          {jp:'緑 (みどり)',ro:'midori',id:'Hijau',ex:'緑の葉 — Daun hijau'},
+        ]
+      },
+      {
+        label: 'Sehari-hari',
+        vocab: [
+          {jp:'おはようございます',ro:'ohayō gozaimasu',id:'Selamat pagi',ex:'朝のあいさつ — Salam pagi'},
+          {jp:'こんにちは',ro:'konnichiwa',id:'Halo / Selamat siang',ex:'昼のあいさつ — Salam siang'},
+          {jp:'こんばんは',ro:'konbanwa',id:'Selamat malam',ex:'夜のあいさつ — Salam malam'},
+          {jp:'ありがとう',ro:'arigatō',id:'Terima kasih',ex:'ありがとうございます — Terima kasih banyak'},
+          {jp:'すみません',ro:'sumimasen',id:'Permisi / Maaf',ex:'すみません！ — Permisi!'},
+          {jp:'はい',ro:'hai',id:'Ya',ex:'はい、そうです — Ya, benar'},
+          {jp:'いいえ',ro:'iie',id:'Tidak',ex:'いいえ、違います — Tidak, berbeda'},
+          {jp:'わかりました',ro:'wakarimashita',id:'Saya mengerti',ex:'はい、わかりました — Ya, saya mengerti'},
+        ]
+      }
+    ],
+    quiz: [
+      {q:'あか (赤) artinya...?',type:'text',choices:['Merah','Biru','Kuning','Hijau'],answer:'Merah'},
+      {q:'"Terima kasih" dalam bahasa Jepang adalah...?',type:'text',choices:['すみません','はい','ありがとう','こんにちは'],answer:'ありがとう'},
+      {q:'"Selamat pagi" dalam bahasa Jepang adalah...?',type:'text',choices:['こんにちは','おはようございます','こんばんは','さようなら'],answer:'おはようございます'},
+      {q:'いち (一) artinya...?',type:'text',choices:['Dua','Tiga','Satu','Empat'],answer:'Satu'},
+      {q:'しろ (白) artinya...?',type:'text',choices:['Hitam','Merah','Putih','Biru'],answer:'Putih'},
+      {q:'"Saya mengerti" dalam bahasa Jepang adalah...?',type:'text',choices:['わかりました','すみません','ありがとう','いいえ'],answer:'わかりました'},
+    ]
+  },
+  grammar: {
+    title: 'Grammar / Tata Bahasa', jp: '文法',
+    patterns: [
+      {pattern:'〜は 〜です',meaning:'... adalah ... (kalimat nominal)',example:'私は学生です。— Saya adalah pelajar.'},
+      {pattern:'〜が あります / います',meaning:'Ada ... (benda mati / makhluk hidup)',example:'猫がいます。— Ada kucing. / 本があります。— Ada buku.'},
+      {pattern:'〜を 〜ます',meaning:'Melakukan ... (kata kerja dengan objek)',example:'ご飯を食べます。— Saya makan nasi.'},
+      {pattern:'〜に 行きます',meaning:'Pergi ke ...',example:'学校に行きます。— Pergi ke sekolah.'},
+      {pattern:'〜で 〜ます',meaning:'... di ... (tempat aktivitas)',example:'図書館で勉強します。— Belajar di perpustakaan.'},
+      {pattern:'〜が 好きです',meaning:'Suka ...',example:'音楽が好きです。— Saya suka musik.'},
+      {pattern:'〜たいです',meaning:'Ingin melakukan ...',example:'日本に行きたいです。— Saya ingin pergi ke Jepang.'},
+      {pattern:'〜てください',meaning:'Tolong lakukan ...',example:'ゆっくり話してください。— Tolong bicara pelan-pelan.'},
+      {pattern:'〜ませんか',meaning:'Bagaimana kalau ... ? (ajakan)',example:'一緒に食べませんか。— Bagaimana kalau makan bersama?'},
+      {pattern:'〜から〜まで',meaning:'Dari ... sampai ...',example:'月曜日から金曜日まで。— Dari Senin sampai Jumat.'},
+    ],
+    quiz: [
+      {q:'"Saya adalah pelajar" dalam bahasa Jepang menggunakan pola...?',type:'text',choices:['〜が好きです','〜は〜です','〜てください','〜たいです'],answer:'〜は〜です'},
+      {q:'Untuk menyatakan "ada kucing", digunakan...?',type:'text',choices:['あります','します','なります','います'],answer:'います'},
+      {q:'"Saya ingin pergi ke Jepang" menggunakan pola...?',type:'text',choices:['〜てください','〜から〜まで','〜たいです','〜ませんか'],answer:'〜たいです'},
+      {q:'〜てください digunakan untuk...?',type:'text',choices:['Meminta tolong','Menyatakan suka','Menyatakan ada','Pergi ke suatu tempat'],answer:'Meminta tolong'},
+      {q:'"Belajar di perpustakaan" menggunakan partikel...?',type:'text',choices:['は','を','に','で'],answer:'で'},
+      {q:'〜ませんか digunakan untuk...?',type:'text',choices:['Menolak ajakan','Memberikan ajakan','Menyatakan tidak suka','Menyatakan tidak bisa'],answer:'Memberikan ajakan'},
+    ]
+  },
+  percakapan: {
+    title: 'Percakapan Sehari-hari', jp: '会話',
+    dialogs: [
+      {
+        title:'自己紹介 — Memperkenalkan Diri',
+        lines:[
+          {who:'A',text:'はじめまして。田中と申します。',tr:'Haji memasite. Tanaka to mōshimasu.'},
+          {who:'B',text:'はじめまして。ジョコと申します。よろしくお願いします。',tr:'Haji memasite. Joko to mōshimasu. Yoroshiku onegaishimasu.'},
+          {who:'A',text:'こちらこそ、よろしくお願いします。',tr:'Kochira koso, yoroshiku onegaishimasu.'},
+        ]
+      },
+      {
+        title:'買い物 — Berbelanja',
+        lines:[
+          {who:'店員',text:'いらっしゃいませ！',tr:'Selamat datang!'},
+          {who:'客',text:'これはいくらですか？',tr:'Kore wa ikura desu ka? — Ini berapa harganya?'},
+          {who:'店員',text:'500円です。',tr:'Gohyaku-en desu. — 500 yen.'},
+          {who:'客',text:'じゃあ、これをください。',tr:'Jaa, kore wo kudasai. — Kalau begitu, tolong yang ini.'},
+        ]
+      },
+      {
+        title:'道を聞く — Menanyakan Jalan',
+        lines:[
+          {who:'A',text:'すみません、駅はどこですか？',tr:'Sumimasen, eki wa doko desu ka? — Permisi, stasiun di mana?'},
+          {who:'B',text:'まっすぐ行って、右に曲がってください。',tr:'Massugu itte, migi ni magatte kudasai. — Jalan lurus, lalu belok kanan.'},
+          {who:'A',text:'どうもありがとうございます。',tr:'Dōmo arigatō gozaimasu. — Terima kasih banyak.'},
+        ]
+      }
+    ],
+    quiz: [
+      {q:'"Berapa harganya?" dalam bahasa Jepang adalah...?',type:'text',choices:['どこですか','いくらですか','なんですか','いつですか'],answer:'いくらですか'},
+      {q:'"Selamat datang" yang diucapkan pelayan toko adalah...?',type:'text',choices:['さようなら','ありがとう','いらっしゃいませ','おはよう'],answer:'いらっしゃいませ'},
+      {q:'はじめまして artinya...?',type:'text',choices:['Sampai jumpa','Salam perkenalan','Terima kasih','Permisi'],answer:'Salam perkenalan'},
+      {q:'"Lurus terus" dalam bahasa Jepang adalah...?',type:'text',choices:['みぎ','ひだり','まっすぐ','うしろ'],answer:'まっすぐ'},
+      {q:'よろしくお願いします berarti...?',type:'text',choices:['Selamat tinggal','Tolong bantuannya','Terima kasih','Permisi'],answer:'Tolong bantuannya'},
+    ]
+  }
+};
 
-.ctabs{display:flex;gap:0;margin-bottom:24px;border-bottom:1px solid var(--border);}
-.ct{padding:9px 20px;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--gray);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;transition:all .2s;}
-.ct.active{color:var(--red);border-bottom-color:var(--red);}
-.ct-panel{display:none;}
-.ct-panel.active{display:block;}
+/* ===== PROGRESS STORE ===== */
+const progress = JSON.parse(localStorage.getItem('nihongo_progress') || '{}');
+function saveProgress(key, val) { progress[key] = val; localStorage.setItem('nihongo_progress', JSON.stringify(progress)); }
 
-/* Soal page */
-#ap-soal{min-height:calc(100vh - 60px);background:var(--cream);}
-.soal-inner{max-width:780px;margin:0 auto;padding:40px 24px;}
+/* ===== OPEN MATERI ===== */
+function openMateri(key) {
+  const d = DATA[key];
+  if (!d) return;
+  const panel = document.getElementById('content-panel');
+  panel.innerHTML = buildPanel(key, d);
+  panel.classList.add('active');
+  panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  initQuiz(key);
+}
 
-.topic-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:36px;}
-.topic-card{
-  background:var(--white);border:1px solid var(--b
+function buildPanel(key, d) {
+  let inner = `
+    <div class="panel-inner">
+      <div class="panel-header">
+        <div class="panel-title">${d.jp} — <span>${d.title}</span></div>
+        <button class="panel-close" onclick="closePanel()">✕</button>
+      </div>`;
+
+  // Tabs or sections
+  if (d.chars) {
+    inner += `<div class="tabs"><div class="tab active" onclick="switchTab(this,'tc-chars')">Karakter</div><div class="tab" onclick="switchTab(this,'tc-quiz')">Latihan Soal</div></div>`;
+    inner += `<div class="tab-content active" id="tc-chars"><div class="char-grid">`;
+    d.chars.forEach(c => { inner += `<div class="char-cell"><span class="char-jp">${c.jp}</span><span class="char-ro">${c.ro}</span></div>`; });
+    inner += `</div></div>`;
+    inner += `<div class="tab-content" id="tc-quiz">${buildQuiz(key, d)}</div>`;
+  } else if (d.vocab && !d.tabs) {
+    inner += `<div class="tabs"><div class="tab active" onclick="switchTab(this,'tc-vocab')">Daftar Kanji</div><div class="tab" onclick="switchTab(this,'tc-quiz')">Latihan Soal</div></div>`;
+    inner += `<div class="tab-content active" id="tc-vocab">${buildVocabTable(d.vocab)}</div>`;
+    inner += `<div class="tab-content" id="tc-quiz">${buildQuiz(key, d)}</div>`;
+  } else if (d.tabs) {
+    inner += `<div class="tabs">`;
+    d.tabs.forEach((t,i) => { inner += `<div class="tab ${i===0?'active':''}" onclick="switchTab(this,'tc-tab${i}')">${t.label}</div>`; });
+    inner += `<div class="tab" onclick="switchTab(this,'tc-quiz')">Latihan Soal</div></div>`;
+    d.tabs.forEach((t,i) => {
+      inner += `<div class="tab-content ${i===0?'active':''}" id="tc-tab${i}">${buildVocabTable(t.vocab)}</div>`;
+    });
+    inner += `<div class="tab-content" id="tc-quiz">${buildQuiz(key, d)}</div>`;
+  } else if (d.patterns) {
+    inner += `<div class="tabs"><div class="tab active" onclick="switchTab(this,'tc-pat')">Pola Kalimat</div><div class="tab" onclick="switchTab(this,'tc-quiz')">Latihan Soal</div></div>`;
+    inner += `<div class="tab-content active" id="tc-pat">`;
+    d.patterns.forEach(p => {
+      inner += `<div class="grammar-pattern"><div class="pattern">${p.pattern}</div><div class="meaning">${p.meaning}</div><div class="example">例：${p.example}</div></div>`;
+    });
+    inner += `</div>`;
+    inner += `<div class="tab-content" id="tc-quiz">${buildQuiz(key, d)}</div>`;
+  } else if (d.dialogs) {
+    inner += `<div class="tabs"><div class="tab active" onclick="switchTab(this,'tc-dial')">Dialog</div><div class="tab" onclick="switchTab(this,'tc-quiz')">Latihan Soal</div></div>`;
+    inner += `<div class="tab-content active" id="tc-dial">`;
+    d.dialogs.forEach(dl => {
+      inner += `<div class="grammar-pattern" style="margin-bottom:24px"><div class="pattern" style="font-size:16px;margin-bottom:16px">${dl.title}</div>`;
+      dl.lines.forEach(l => {
+        inner += `<div style="margin-bottom:10px"><strong style="color:var(--red);font-size:12px">${l.who}：</strong><span style="font-family:'Noto Serif JP',serif;font-size:15px"> ${l.text}</span><div style="font-size:12px;color:#888;margin-top:2px;padding-left:32px">${l.tr}</div></div>`;
+      });
+      inner += `</div>`;
+    });
+    inner += `</div>`;
+    inner += `<div class="tab-content" id="tc-quiz">${buildQuiz(key, d)}</div>`;
+  }
+
+  inner += `</div>`;
+  return inner;
+}
+
+function buildVocabTable(vocab) {
+  let t = `<table class="vocab-table"><thead><tr><th>Jepang</th><th>Romaji</th><th>Indonesia</th><th>Contoh</th></tr></thead><tbody>`;
+  vocab.forEach(v => {
+    t += `<tr><td class="jp">${v.jp}</td><td class="ro">${v.ro}</td><td class="id">${v.id}</td><td class="ex">${v.ex}</td></tr>`;
+  });
+  t += `</tbody></table>`;
+  return t;
+}
+
+function buildQuiz(key, d) {
+  return `
+    <div class="quiz-section">
+      <div class="quiz-header">
+        <div class="quiz-badge">Latihan Soal</div>
+        <div class="quiz-title">Uji Pemahamanmu</div>
+        <div class="quiz-progress" id="qprog-${key}">Soal 1 dari ${d.quiz.length}</div>
+      </div>
+      <div id="quiz-body-${key}"></div>
+      <div class="quiz-result" id="quiz-result-${key}">
+        <div class="result-score" id="rs-${key}">0/${d.quiz.length}</div>
+        <div class="result-label">Skor Kamu</div>
+        <div class="result-msg" id="rm-${key}"></div>
+        <div class="quiz-nav" style="justify-content:center;margin-top:32px">
+          <button class="btn-restart" onclick="restartQuiz('${key}')">Ulangi Latihan</button>
+        </div>
+      </div>
+    </div>`;
+}
+
+/* ===== QUIZ ENGINE ===== */
+const quizState = {};
+
+function initQuiz(key) {
+  const d = DATA[key];
+  quizState[key] = { idx: 0, score: 0, answered: false };
+  renderQuestion(key);
+}
+
+function renderQuestion(key) {
+  const d = DATA[key];
+  const st = quizState[key];
+  if (!d || !st) return;
+  const q = d.quiz[st.idx];
+  if (!q) { showResult(key); return; }
+
+  document.getElementById(`qprog-${key}`).textContent = `Soal ${st.idx+1} dari ${d.quiz.length}`;
+
+  const isChar = q.type === 'char';
+  let html = `<div class="quiz-card">`;
+  if (isChar) {
+    html += `<span class="quiz-q">${q.q}</span><p class="quiz-q-text">Pilih bacaan yang benar:</p>`;
+  } else {
+    html += `<p class="quiz-q-text" style="font-size:17px">${q.q}</p>`;
+  }
+  html += `<div class="quiz-options">`;
+  q.choices.forEach(c => {
+    html += `<button class="quiz-opt" onclick="checkAnswer('${key}','${c.replace(/'/g,"\\'")}',this)">${c}</button>`;
+  });
+  html += `</div><div class="quiz-feedback" id="qf-${key}"></div>`;
+  html += `<div class="quiz-nav"><button class="btn-next" id="qnext-${key}" onclick="nextQ('${key}')" style="display:none">Soal Berikutnya →</button></div>`;
+  html += `</div>`;
+
+  document.getElementById(`quiz-body-${key}`).innerHTML = html;
+}
+
+function checkAnswer(key, chosen, btn) {
+  const st = quizState[key];
+  if (st.answered) return;
+  st.answered = true;
+
+  const d = DATA[key];
+  const q = d.quiz[st.idx];
+  const correct = chosen === q.answer;
+  if (correct) st.score++;
+
+  const opts = document.querySelectorAll(`#quiz-body-${key} .quiz-opt`);
+  opts.forEach(o => {
+    o.disabled = true;
+    if (o.textContent === q.answer) o.classList.add('correct');
+  });
+  if (!correct) btn.classList.add('wrong');
+
+  const fb = document.getElementById(`qf-${key}`);
+  fb.className = `quiz-feedback ${correct ? 'correct' : 'wrong'}`;
+  fb.innerHTML = correct
+    ? `✓ Benar! ${q.q} dibaca / berarti <strong>${q.answer}</strong>.`
+    : `✗ Kurang tepat. Jawaban yang benar adalah <strong>${q.answer}</strong>.`;
+
+  document.getElementById(`qnext-${key}`).style.display = 'block';
+}
+
+function nextQ(key) {
+  const st = quizState[key];
+  st.idx++;
+  st.answered = false;
+  renderQuestion(key);
+}
+
+function showResult(key) {
+  const d = DATA[key];
+  const st = quizState[key];
+  document.getElementById(`quiz-body-${key}`).innerHTML = '';
+  document.getElementById(`qprog-${key}`).textContent = 'Selesai!';
+  const res = document.getElementById(`quiz-result-${key}`);
+  res.style.display = 'block';
+  document.getElementById(`rs-${key}`).textContent = `${st.score}/${d.quiz.length}`;
+  const pct = Math.round(st.score/d.quiz.length*100);
+  let msg = pct >= 80 ? '素晴らしい！ Luar biasa! Kamu sangat memahami materi ini.'
+          : pct >= 60 ? 'よくできました！ Bagus! Sedikit lagi kamu akan sempurna.'
+          : 'がんばれ！ Jangan menyerah! Coba pelajari lagi materinya.';
+  document.getElementById(`rm-${key}`).textContent = msg;
+  updateProgressBar(key, pct);
+}
+
+function restartQuiz(key) {
+  quizState[key] = { idx: 0, score: 0, answered: false };
+  document.getElementById(`quiz-result-${key}`).style.display = 'none';
+  renderQuestion(key);
+}
+
+function updateProgressBar(key, pct) {
+  const bar = document.getElementById(`pb-${key}`);
+  const num = document.getElementById(`pn-${key}`);
+  if (!bar) return;
+  const maxMap = {hiragana:46,katakana:46,kanji:100,kosakata:200,grammar:30,percakapan:15};
+  const m = maxMap[key] || 100;
+  const achieved = Math.round(pct/100*m);
+  bar.style.setProperty('--w', pct/100);
+  bar.classList.add('animate');
+  num.textContent = achieved;
+  saveProgress(key, pct);
+}
+
+/* ===== PANEL CONTROLS ===== */
+function closePanel() {
+  const p = document.getElementById('content-panel');
+  p.classList.remove('active');
+  p.innerHTML = '';
+}
+
+function switchTab(el, id) {
+  el.closest('.panel-inner, .quiz-section').querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  el.closest('.panel-inner, .quiz-section').querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+  const tc = document.getElementById(id);
+  if (tc) tc.classList.add('active');
+}
+
+/* ===== NAV SCROLL ===== */
+function scrollTo(id) {
+  document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+}
+
+/* ===== SCROLL ANIMATIONS ===== */
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+}, { threshold: 0.1 });
+document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+/* ===== PROGRESS BARS ANIMATE ON VIEW ===== */
+const progObserver = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      document.querySelectorAll('.prog-bar').forEach(b => {
+        const key = b.id.replace('pb-','');
+        const pct = progress[key] || 0;
+        b.style.setProperty('--w', pct/100);
+        setTimeout(() => b.classList.add('animate'), 300);
+        const num = document.getElementById(`pn-${key}`);
+        const maxMap = {hiragana:46,katakana:46,kanji:100,kosakata:200,grammar:30,percakapan:15};
+        if (num) num.textContent = Math.round(pct/100*(maxMap[key]||100));
+      });
+    }
+  });
+}, { threshold: 0.3 });
+const ps = document.getElementById('prog-grid');
+if (ps) progObserver.observe(ps);
+
+
+/* ============================================================
+   PATCH: Save progress to VIP storage when quiz completes
+============================================================ */
+const _origSaveProgress = saveProgress;
+function saveProgress(key, val){
+  _origSaveProgress(key, val);
+  if(CU){
+    const p = vgs(VK.progress)||{};
+    if(!p[CU.username]) p[CU.username]={};
+    p[CU.username][key] = Math.max(p[CU.username][key]||0, val);
+    vss(VK.progress, p);
+  }
+}
+
+/* ============================================================
+   PATCH: scrollTo conflicts with built-in window.scrollTo
+   Rename old nav scroll function
+============================================================ */
+function navScrollTo(id){
+  const el = document.getElementById(id);
+  if(el) el.scrollIntoView({ behavior:'smooth' });
+}
+// Fix nav links inside old content
+document.querySelectorAll('#main-nav .nav-link').forEach(l => {
+  const oc = l.getAttribute('onclick');
+  if(oc) l.setAttribute('onclick', oc.replace("scrollTo(", "navScrollTo("));
+});
+
+</script>
+</body>
+</html>
